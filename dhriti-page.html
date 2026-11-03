@@ -1278,7 +1278,7 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
         <h3 class="sec__h"><span>2</span>Your details</h3>
         <div class="fld "><label class="f" for="f-name">Full name <span class="req">*</span></label><input type="text" id="f-name" name="entry.1560535116" autocomplete="name" required><p class="err" data-err="name" hidden>Please enter your name.</p></div>
         <div class="grid2">
-          <div class="fld "><label class="f" for="f-phone">Mobile number (WhatsApp) <span class="req">*</span></label><input type="tel" id="f-phone" name="entry.893564593" autocomplete="tel" inputmode="tel" placeholder="+91 98765 43210" required><p class="err" data-err="phone" hidden>Please enter a valid mobile number.</p></div>
+          <div class="fld "><label class="f" for="f-phone">Mobile number (WhatsApp) <span class="req">*</span></label><input type="tel" id="f-phone" name="entry.893564593" autocomplete="tel" inputmode="tel" placeholder="+91 98765 43210 (or +971, +1 …)" required><p class="err" data-err="phone" hidden>Please enter a valid mobile number.</p></div>
           <div class="fld "><label class="f" for="f-email">Email <span class="req">*</span></label><input type="email" id="f-email" name="entry.1740966061" autocomplete="email" placeholder="you@example.com" required><p class="err" data-err="email" hidden>Please enter a valid email.</p></div>
         </div>
         <div class="grid2">
@@ -2802,7 +2802,8 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
       [["Batch", batches.map(function (b) { var lab = b.nextElementSibling; return lab.querySelector("b").textContent + " (" + lab.querySelector("small").textContent + ")"; }).join(", ")], ["WhatsApp", phone.value.trim()], ["Dates", BATCH.range], ["Fee", "₹999"]].forEach(function (r) {
         var dt = document.createElement("dt"), dd = document.createElement("dd"); dt.textContent = r[0]; dd.textContent = r[1]; sum.appendChild(dt); sum.appendChild(dd);
       });
-      var person = { name: name.value.trim(), email: email.value.trim(), phone: phone.value.replace(/\D/g, "").slice(-10), batch: BATCH.rangeShort + " " + BATCH.y + " | " + batches.map(function (b) { return b.value; }).join(", ") };
+      var rawPh = phone.value.trim(), digits = rawPh.replace(/\D/g, ""), intl = /^(\+|00)/.test(rawPh) && !/^(\+|00)91/.test(rawPh);
+      var person = { name: name.value.trim(), email: email.value.trim(), contact: intl ? "+" + digits.replace(/^00/, "") : "+91" + digits.slice(-10), phone: digits.slice(-10), batch: BATCH.rangeShort + " " + BATCH.y + " | " + batches.map(function (b) { return b.value; }).join(", ") };
       form.reset(); form.hidden = true;
       if (preview || NEWPAY) { lastPerson = person; showPay(person, batches); return; }
       return startPayment(person);
@@ -2896,7 +2897,7 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
   var BANKS = { "SBI": "SBIN", "HDFC": "HDFC", "ICICI": "ICIC", "Axis": "UTIB", "Kotak": "KKBK", "Canara": "CNRB", "Bank of Baroda": "BARB_R", "Punjab National Bank": "PUNB_R", "Union Bank of India": "UBIN", "Indian Bank": "IDIB", "IDFC FIRST Bank": "IDFB", "Yes Bank": "YESB", "Federal Bank": "FDRL", "IndusInd Bank": "INDB" };
   function realPay() {
     if (orderErr || !order) { prepOrder(lastPerson); return; }
-    var base = { amount: order.amount, currency: order.currency || "INR", order_id: order.orderId, email: lastPerson.email, contact: "+91" + lastPerson.phone, notes: { batch: lastPerson.batch } };
+    var base = { amount: order.amount, currency: order.currency || "INR", order_id: order.orderId, email: lastPerson.email, contact: (lastPerson.contact || "+91" + lastPerson.phone), notes: { batch: lastPerson.batch } };
     if (method === "upi" && !mobile) { checkQr(true); return; }
     try {
       if (method === "upi") {
@@ -2918,7 +2919,7 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
   function qrStandard() {
     loadRzp().then(function () {
       var w = new window.Razorpay({ key: order.keyId, order_id: order.orderId, amount: order.amount, currency: order.currency || "INR", name: "Shudda Hathayoga", description: "Dhriti 21-Day Online Sadhana · " + BATCH.rangeShort,
-        prefill: { name: lastPerson.name, email: lastPerson.email, contact: "+91" + lastPerson.phone }, theme: { color: "#014B3F", backdrop_color: "#04211C" },
+        prefill: { name: lastPerson.name, email: lastPerson.email, contact: (lastPerson.contact || "+91" + lastPerson.phone) }, theme: { color: "#014B3F", backdrop_color: "#04211C" },
         config: { display: { blocks: { upi: { name: "Scan to pay with UPI", instruments: [{ method: "upi", flows: ["qr"] }] } }, sequence: ["block.upi"], preferences: { show_default_blocks: false } } },
         modal: { ondismiss: function () { payFail("Payment not completed yet."); } },
         handler: function (r) { payDone(r); } });
@@ -3052,14 +3053,14 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
       window.parent.postMessage({ type: "dhriti-pay", options: {
         key: o.keyId, order_id: o.orderId, amount: o.amount, currency: o.currency || "INR",
         name: "Shudda Hathayoga", description: "Dhriti 21-Day Online Sadhana · " + BATCH.rangeShort,
-        prefill: { name: person.name, email: person.email, contact: "+91" + person.phone },
+        prefill: { name: person.name, email: person.email, contact: (person.contact || "+91" + person.phone) },
         notes: { batch: person.batch }, theme: { color: "#014B3F", backdrop_color: "#04211C" } } }, bridge);
       return;
     }
     var rzp = new window.Razorpay({
       key: o.keyId, order_id: o.orderId, amount: o.amount, currency: o.currency || "INR",
       name: "Shudda Hathayoga", description: "Dhriti 21-Day Online Sadhana · " + BATCH.rangeShort,
-      prefill: { name: person.name, email: person.email, contact: "+91" + person.phone },
+      prefill: { name: person.name, email: person.email, contact: (person.contact || "+91" + person.phone) },
       notes: { batch: person.batch },
       theme: { color: "#014B3F", backdrop_color: "#04211C" },
       modal: { confirm_close: true, ondismiss: function () { showDone("pending", null, "Payment not completed yet. Tap the button to try again."); } },
