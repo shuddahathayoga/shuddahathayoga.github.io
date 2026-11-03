@@ -862,6 +862,74 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
 .reg__done .sum { width: 100%; max-width: 26rem; text-align: left; display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 1rem; padding: 1rem; border-radius: 14px; background: rgba(255,246,239,0.05); font-size: var(--sc-t-sm); }
 .reg__done .sum dt { color: var(--d-soft); } .reg__done .sum dd { margin: 0; }
 .reg__done .phone { user-select: all; }
+/* ---------- themed checkout (step 2, inside the form) ---------- */
+.pay { display: flex; flex-direction: column; min-height: 0; max-height: inherit; }
+.pay[hidden] { display: none !important; }
+.reg__head > .label { padding-right: 2.75rem; }
+.pay__body { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 1.25rem 1.5rem 1.5rem; display: grid; gap: 1.1rem; align-content: start; }
+.pay__sum { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 0.25rem 1rem; padding: 1rem 1.1rem; border-radius: 16px; background: rgba(255,246,239,0.05); border: 1px solid var(--d-line); }
+.pay__sum small { grid-column: 1; color: var(--d-soft); font-size: var(--sc-t-xs); letter-spacing: 0.12em; text-transform: uppercase; }
+.pay__sum b { grid-column: 1; font-weight: 400; font-family: var(--sc-font-display); font-size: var(--sc-t-lg); }
+.pay__sum span { grid-column: 1; color: var(--d-mid); font-size: var(--sc-t-sm); }
+.pay__sum .pay__amt { grid-column: 2; grid-row: 1 / span 3; font-family: var(--sc-font-display); font-size: var(--sc-t-2xl); color: var(--d-accent); }
+.pay__tabs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.35rem; padding: 0.35rem; border-radius: 22px; background: rgba(255,246,239,0.05); border: 1px solid var(--d-line); }
+.pay__tabs button { appearance: none; border: 0; border-radius: 999px; padding: 0.7rem 0.4rem; font: inherit; font-size: var(--sc-t-sm); color: var(--d-mid); background: transparent; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; }
+.pay__tabs button svg { width: 18px; height: 18px; flex: none; }
+.pay__tabs button[aria-selected="true"] { background: var(--d-accent); color: #1D0E03; }
+.pay__tabs button:focus-visible { outline: 2px solid var(--d-accent); outline-offset: 2px; }
+.pay__pane[hidden] { display: none !important; }
+.pay__pane { display: grid; gap: 0.9rem; }
+.pay__lead { margin: 0; color: var(--d-mid); font-size: var(--sc-t-sm); }
+.apps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; }
+.app { appearance: none; font: inherit; cursor: pointer; display: grid; justify-items: center; gap: 0.45rem; padding: 0.9rem 0.3rem 0.75rem; border-radius: 16px; border: 1px solid rgba(255,246,239,0.16); background: rgba(255,246,239,0.03); color: var(--d-ink); font-size: var(--sc-t-xs); }
+.app i { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-style: normal; font-weight: 600; font-size: 0.8rem; color: #fff; }
+.app[aria-pressed="true"] { border-color: var(--d-accent); background: rgba(242,166,90,0.14); box-shadow: inset 0 0 0 1px var(--d-accent); }
+.app:focus-visible { outline: 2px solid var(--d-accent); outline-offset: 2px; }
+.qr { display: grid; grid-template-columns: auto 1fr; gap: 1.1rem; align-items: center; padding: 1rem; border-radius: 16px; background: rgba(255,246,239,0.04); border: 1px solid var(--d-line); }
+.qr__box { width: 148px; height: 148px; border-radius: 14px; background: #FFF6EF; padding: 10px; box-sizing: border-box; position: relative; }
+.qr__box svg { width: 100%; height: 100%; display: block; }
+.qr__box em { position: absolute; inset: 0; margin: auto; width: 34px; height: 34px; border-radius: 9px; background: #04211C; display: grid; place-items: center; color: #F2A65A; font-style: normal; font-size: 18px; }
+.qr p { margin: 0; color: var(--d-mid); font-size: var(--sc-t-sm); }
+.qr p b { display: block; color: var(--d-ink); font-weight: 400; font-family: var(--sc-font-display); font-size: var(--sc-t-lg); margin-bottom: 0.3rem; }
+.qr__t { margin-top: 0.6rem !important; color: var(--d-accent) !important; font-size: var(--sc-t-xs) !important; letter-spacing: 0.12em; text-transform: uppercase; }
+.or { display: flex; align-items: center; gap: 0.75rem; color: var(--d-soft); font-size: var(--sc-t-xs); letter-spacing: 0.14em; text-transform: uppercase; }
+.or::before, .or::after { content: ""; flex: 1; height: 1px; background: var(--d-line); }
+.cardf { display: grid; gap: 0.8rem; }
+.cardf .row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+.cardf .num { position: relative; }
+.cardf .num span { position: absolute; right: 0.9rem; top: 50%; translate: 0 -50%; font-size: var(--sc-t-xs); letter-spacing: 0.1em; color: var(--d-accent); text-transform: uppercase; }
+.banks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+.bank { appearance: none; font: inherit; cursor: pointer; padding: 0.85rem 0.4rem; border-radius: 14px; border: 1px solid rgba(255,246,239,0.16); background: rgba(255,246,239,0.03); color: var(--d-ink); font-size: var(--sc-t-sm); }
+.bank[aria-pressed="true"] { border-color: var(--d-accent); background: rgba(242,166,90,0.14); box-shadow: inset 0 0 0 1px var(--d-accent); }
+.reg select.bsel { width: 100%; height: 3rem; border-radius: 12px; border: 1px solid rgba(255,246,239,0.16); background: rgba(255,246,239,0.06); color: var(--d-ink); font: inherit; padding: 0 0.9rem; }
+.reg select.bsel option { color: #04211C; }
+.pay__go { width: 100%; justify-content: center; }
+.pay__go[disabled] { opacity: 0.6; cursor: progress; }
+.pay__secure { margin: 0; display: flex; align-items: center; justify-content: center; gap: 0.5rem; color: var(--d-soft); font-size: var(--sc-t-xs); letter-spacing: 0.06em; text-align: center; }
+.pay__secure svg { width: 14px; height: 14px; flex: none; color: var(--d-accent); }
+.pay__back { appearance: none; border: 0; background: none; color: var(--d-soft); font: inherit; font-size: var(--sc-t-sm); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; justify-self: center; }
+.pay__wait { display: grid; justify-items: center; gap: 0.8rem; padding: 2rem 1rem; text-align: center; }
+.pay__wait[hidden] { display: none !important; }
+.pay__wait p { margin: 0; color: var(--d-mid); max-width: 22rem; }
+.pay__wait b { font-weight: 400; font-family: var(--sc-font-display); font-size: var(--sc-t-xl); color: var(--d-ink); }
+.spin { width: 54px; height: 54px; border-radius: 50%; border: 2px solid rgba(242,166,90,0.2); border-top-color: var(--d-accent); animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.pay__demo { margin: 0; padding: 0.6rem 0.9rem; border-radius: 12px; background: rgba(242,166,90,0.1); border: 1px dashed rgba(242,166,90,0.45); color: var(--d-accent2); font-size: var(--sc-t-xs); text-align: center; }
+@media (max-width: 480px) {
+  .pay .reg__head > p:not(.label) { display: none; }
+  .pay .reg__head .label { font-size: 0.62rem; }
+  .pay__body { padding: 1rem 1rem 1.25rem; }
+  .apps { grid-template-columns: repeat(2, 1fr); }
+  .app { grid-template-columns: auto 1fr; justify-items: start; align-items: center; padding: 0.7rem 0.8rem; font-size: var(--sc-t-sm); }
+  .app i { width: 34px; height: 34px; }
+  .qr { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .banks { grid-template-columns: repeat(2, 1fr); }
+  .pay__tabs { grid-template-columns: repeat(6, 1fr); }
+  .pay__tabs button { font-size: var(--sc-t-xs); gap: 0.3rem; grid-column: span 2; }
+  .pay__tabs button:nth-child(n+4) { grid-column: span 3; }
+  .pay__tabs button svg { width: 15px; height: 15px; }
+}
+
 
 .reg { width: min(46rem, calc(100vw - 16px)); max-height: 94svh; }
 .reg .steps { list-style: none; display: flex; gap: 0.5rem; margin: 0.9rem 0 0; padding: 0; font-size: var(--sc-t-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--d-soft); }
@@ -1248,7 +1316,7 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
       <div class="reg__note">
         <p><b>Guidelines</b></p>
         <ul><li>Prior experience of yoga is not needed.</li><li>Attendance in all sessions is mandatory.</li></ul>
-        <p><b>Program fee:</b> 21 days, ₹999. After submitting, you go straight to the secure Wix checkout, where you can pay by card, UPI, Google Pay or other options. Our team will help if you face any difficulty with payment.</p>
+        <p><b>Program fee:</b> 21 days, ₹999. After submitting, you pay right here by UPI, card or netbanking, secured by Razorpay. Our team will help if you face any difficulty with payment.</p>
       </div>
       <p class="err" id="regErr" hidden></p>
       <div class="reg__foot">
@@ -1257,6 +1325,89 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
       </div>
     </div>
   </form>
+
+  <div class="pay" id="regPay" hidden>
+    <div class="reg__head">
+      <p class="label" data-b="formlabel">Dhriti &middot; Online Sadhana Program</p>
+      <h2>Checkout</h2>
+      <p>Your details are saved. Complete the payment here to confirm your place.</p>
+      <ol class="steps" aria-label="Steps"><li>Your details</li><li class="on">Checkout &middot; ₹999</li></ol>
+      <button type="button" class="reg__x" id="payClose" aria-label="Close">&times;</button>
+    </div>
+    <div class="pay__body" id="payMain">
+      <div class="pay__sum"><small>Dhriti 21-day sadhana</small><b id="paySumName">Namaskaram</b><span id="paySumBatch"></span><span class="pay__amt">₹999</span></div>
+      <div class="pay__tabs" role="tablist" aria-label="Payment method">
+        <button type="button" role="tab" aria-selected="true" aria-controls="pm-upi" id="pt-upi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg>UPI</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="pm-card" id="pt-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 9.5h19M6 15h4"/></svg>Card</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="pm-nb" id="pt-nb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20.5h18"/></svg>Netbanking</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="pm-wallet" id="pt-wallet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 7.5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-10a2 2 0 0 1 2-2h11"/><path d="M15.5 13.5h4.5"/><circle cx="16" cy="13.5" r=".6" fill="currentColor"/></svg>Wallet</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="pm-later" id="pt-later"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>Pay Later</button>
+      </div>
+
+      <div class="pay__pane" id="pm-upi" role="tabpanel" aria-labelledby="pt-upi">
+        <p class="pay__lead" data-mob>Choose your UPI app. It opens on your phone with ₹999 filled in. Approve with your PIN and come back here.</p>
+        <div class="apps" data-mob>
+          <button type="button" class="app" data-app="Google Pay" data-code="gpay" aria-pressed="true"><i style="background:linear-gradient(135deg,#4285F4,#34A853)">G</i>Google Pay</button>
+          <button type="button" class="app" data-app="PhonePe" data-code="phonepe" aria-pressed="false"><i style="background:#5F259F">Pe</i>PhonePe</button>
+          <button type="button" class="app" data-app="Paytm" data-code="paytm" aria-pressed="false"><i style="background:#00BAF2">P</i>Paytm</button>
+          <button type="button" class="app" data-app="your UPI app" data-code="any" aria-pressed="false"><i style="background:#2A3B36;color:#F2A65A">UPI</i>Other app</button>
+        </div>
+        <div class="qr" data-desk>
+          <div class="qr__box" id="qrBox"><img id="qrImg" alt="UPI QR code for ₹999" hidden style="position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);object-fit:contain;background:#FFF6EF;border-radius:10px"><svg viewBox="0 0 25 25" aria-hidden="true" shape-rendering="crispEdges"><path fill="#04211C" d="M0 0h1v1h-1zM0 1h1v1h-1zM0 2h1v1h-1zM0 3h1v1h-1zM0 4h1v1h-1zM0 5h1v1h-1zM0 6h1v1h-1zM0 8h1v1h-1zM0 9h1v1h-1zM0 11h1v1h-1zM0 13h1v1h-1zM0 14h1v1h-1zM0 16h1v1h-1zM0 18h1v1h-1zM0 19h1v1h-1zM0 20h1v1h-1zM0 21h1v1h-1zM0 22h1v1h-1zM0 23h1v1h-1zM0 24h1v1h-1zM1 0h1v1h-1zM1 6h1v1h-1zM1 8h1v1h-1zM1 9h1v1h-1zM1 10h1v1h-1zM1 11h1v1h-1zM1 13h1v1h-1zM1 14h1v1h-1zM1 18h1v1h-1zM1 24h1v1h-1zM2 0h1v1h-1zM2 2h1v1h-1zM2 3h1v1h-1zM2 4h1v1h-1zM2 6h1v1h-1zM2 9h1v1h-1zM2 11h1v1h-1zM2 13h1v1h-1zM2 14h1v1h-1zM2 15h1v1h-1zM2 16h1v1h-1zM2 18h1v1h-1zM2 20h1v1h-1zM2 21h1v1h-1zM2 22h1v1h-1zM2 24h1v1h-1zM3 0h1v1h-1zM3 2h1v1h-1zM3 3h1v1h-1zM3 4h1v1h-1zM3 6h1v1h-1zM3 9h1v1h-1zM3 12h1v1h-1zM3 14h1v1h-1zM3 15h1v1h-1zM3 16h1v1h-1zM3 18h1v1h-1zM3 20h1v1h-1zM3 21h1v1h-1zM3 22h1v1h-1zM3 24h1v1h-1zM4 0h1v1h-1zM4 2h1v1h-1zM4 3h1v1h-1zM4 4h1v1h-1zM4 6h1v1h-1zM4 9h1v1h-1zM4 10h1v1h-1zM4 12h1v1h-1zM4 13h1v1h-1zM4 16h1v1h-1zM4 18h1v1h-1zM4 20h1v1h-1zM4 21h1v1h-1zM4 22h1v1h-1zM4 24h1v1h-1zM5 0h1v1h-1zM5 6h1v1h-1zM5 12h1v1h-1zM5 14h1v1h-1zM5 15h1v1h-1zM5 18h1v1h-1zM5 24h1v1h-1zM6 0h1v1h-1zM6 1h1v1h-1zM6 2h1v1h-1zM6 3h1v1h-1zM6 4h1v1h-1zM6 5h1v1h-1zM6 6h1v1h-1zM6 8h1v1h-1zM6 10h1v1h-1zM6 15h1v1h-1zM6 18h1v1h-1zM6 19h1v1h-1zM6 20h1v1h-1zM6 21h1v1h-1zM6 22h1v1h-1zM6 23h1v1h-1zM6 24h1v1h-1zM7 10h1v1h-1zM7 13h1v1h-1zM7 15h1v1h-1zM8 3h1v1h-1zM8 4h1v1h-1zM8 6h1v1h-1zM8 7h1v1h-1zM8 8h1v1h-1zM8 9h1v1h-1zM8 10h1v1h-1zM8 12h1v1h-1zM8 13h1v1h-1zM8 14h1v1h-1zM8 16h1v1h-1zM8 17h1v1h-1zM8 22h1v1h-1zM8 23h1v1h-1zM8 24h1v1h-1zM9 2h1v1h-1zM9 3h1v1h-1zM9 4h1v1h-1zM9 5h1v1h-1zM9 8h1v1h-1zM9 16h1v1h-1zM9 17h1v1h-1zM9 18h1v1h-1zM10 0h1v1h-1zM10 5h1v1h-1zM10 6h1v1h-1zM10 7h1v1h-1zM10 16h1v1h-1zM10 17h1v1h-1zM10 18h1v1h-1zM10 19h1v1h-1zM10 20h1v1h-1zM10 21h1v1h-1zM10 22h1v1h-1zM10 23h1v1h-1zM10 24h1v1h-1zM11 0h1v1h-1zM11 1h1v1h-1zM11 4h1v1h-1zM11 5h1v1h-1zM11 6h1v1h-1zM11 7h1v1h-1zM11 8h1v1h-1zM11 18h1v1h-1zM11 20h1v1h-1zM11 21h1v1h-1zM11 22h1v1h-1zM11 23h1v1h-1zM12 0h1v1h-1zM12 1h1v1h-1zM12 4h1v1h-1zM12 6h1v1h-1zM12 18h1v1h-1zM12 19h1v1h-1zM12 20h1v1h-1zM12 24h1v1h-1zM13 0h1v1h-1zM13 7h1v1h-1zM13 16h1v1h-1zM13 17h1v1h-1zM13 18h1v1h-1zM13 19h1v1h-1zM13 20h1v1h-1zM13 23h1v1h-1zM14 2h1v1h-1zM14 3h1v1h-1zM14 4h1v1h-1zM14 5h1v1h-1zM14 6h1v1h-1zM14 17h1v1h-1zM14 20h1v1h-1zM15 0h1v1h-1zM15 1h1v1h-1zM15 3h1v1h-1zM15 6h1v1h-1zM15 7h1v1h-1zM15 17h1v1h-1zM15 18h1v1h-1zM15 19h1v1h-1zM15 22h1v1h-1zM16 1h1v1h-1zM16 3h1v1h-1zM16 4h1v1h-1zM16 9h1v1h-1zM16 12h1v1h-1zM16 13h1v1h-1zM16 14h1v1h-1zM16 15h1v1h-1zM16 17h1v1h-1zM16 18h1v1h-1zM16 19h1v1h-1zM16 21h1v1h-1zM16 22h1v1h-1zM17 8h1v1h-1zM17 13h1v1h-1zM17 14h1v1h-1zM17 15h1v1h-1zM17 16h1v1h-1zM17 18h1v1h-1zM17 19h1v1h-1zM17 22h1v1h-1zM18 0h1v1h-1zM18 1h1v1h-1zM18 2h1v1h-1zM18 3h1v1h-1zM18 4h1v1h-1zM18 5h1v1h-1zM18 6h1v1h-1zM18 9h1v1h-1zM18 11h1v1h-1zM18 12h1v1h-1zM18 18h1v1h-1zM18 23h1v1h-1zM19 0h1v1h-1zM19 6h1v1h-1zM19 8h1v1h-1zM19 13h1v1h-1zM19 17h1v1h-1zM19 18h1v1h-1zM19 19h1v1h-1zM19 20h1v1h-1zM19 21h1v1h-1zM19 22h1v1h-1zM20 0h1v1h-1zM20 2h1v1h-1zM20 3h1v1h-1zM20 4h1v1h-1zM20 6h1v1h-1zM20 9h1v1h-1zM20 12h1v1h-1zM20 15h1v1h-1zM20 17h1v1h-1zM20 21h1v1h-1zM20 22h1v1h-1zM20 24h1v1h-1zM21 0h1v1h-1zM21 2h1v1h-1zM21 3h1v1h-1zM21 4h1v1h-1zM21 6h1v1h-1zM21 8h1v1h-1zM21 9h1v1h-1zM21 11h1v1h-1zM21 13h1v1h-1zM21 14h1v1h-1zM21 15h1v1h-1zM21 18h1v1h-1zM21 22h1v1h-1zM21 23h1v1h-1zM21 24h1v1h-1zM22 0h1v1h-1zM22 2h1v1h-1zM22 3h1v1h-1zM22 4h1v1h-1zM22 6h1v1h-1zM22 9h1v1h-1zM22 10h1v1h-1zM22 11h1v1h-1zM22 14h1v1h-1zM22 15h1v1h-1zM22 19h1v1h-1zM22 20h1v1h-1zM22 22h1v1h-1zM22 23h1v1h-1zM23 0h1v1h-1zM23 6h1v1h-1zM23 10h1v1h-1zM23 12h1v1h-1zM23 14h1v1h-1zM23 15h1v1h-1zM23 18h1v1h-1zM23 19h1v1h-1zM23 21h1v1h-1zM23 22h1v1h-1zM23 23h1v1h-1zM23 24h1v1h-1zM24 0h1v1h-1zM24 1h1v1h-1zM24 2h1v1h-1zM24 3h1v1h-1zM24 4h1v1h-1zM24 5h1v1h-1zM24 6h1v1h-1zM24 8h1v1h-1zM24 9h1v1h-1zM24 10h1v1h-1zM24 12h1v1h-1zM24 14h1v1h-1zM24 15h1v1h-1zM24 16h1v1h-1zM24 17h1v1h-1zM24 18h1v1h-1zM24 21h1v1h-1zM24 22h1v1h-1zM24 24h1v1h-1z"/></svg><em>❁</em></div>
+          <p><b>Scan with any UPI app</b>Open Google Pay, PhonePe, Paytm or your bank app, scan this code and approve ₹999.<span class="qr__t" style="display:block">Code valid for <span id="qrT">10:00</span></span></p>
+        </div>
+      </div>
+
+      <div class="pay__pane" id="pm-card" role="tabpanel" aria-labelledby="pt-card" hidden>
+        <div class="cardf">
+          <div class="fld num"><label class="f" for="c-num">Card number</label><input type="text" id="c-num" inputmode="numeric" autocomplete="cc-number" placeholder="1234 5678 9012 3456" maxlength="23"><span id="c-brand"></span></div>
+          <div class="row">
+            <div class="fld"><label class="f" for="c-exp">Expiry</label><input type="text" id="c-exp" inputmode="numeric" autocomplete="cc-exp" placeholder="MM / YY" maxlength="7"></div>
+            <div class="fld"><label class="f" for="c-cvv">CVV</label><input type="text" id="c-cvv" inputmode="numeric" autocomplete="cc-csc" placeholder="•••" maxlength="4"></div>
+          </div>
+          <div class="fld"><label class="f" for="c-name">Name on card</label><input type="text" id="c-name" autocomplete="cc-name"></div>
+        </div>
+        <p class="pay__lead">Your bank will ask for an OTP on the next screen.</p>
+      </div>
+
+      <div class="pay__pane" id="pm-nb" role="tabpanel" aria-labelledby="pt-nb" hidden>
+        <div class="banks" data-group="nb">
+          <button type="button" class="bank" aria-pressed="true">SBI</button><button type="button" class="bank" aria-pressed="false">HDFC</button><button type="button" class="bank" aria-pressed="false">ICICI</button>
+          <button type="button" class="bank" aria-pressed="false">Axis</button><button type="button" class="bank" aria-pressed="false">Kotak</button><button type="button" class="bank" aria-pressed="false">Canara</button>
+        </div>
+        <select class="bsel" aria-label="Other banks"><option value="">Other banks</option><option>Bank of Baroda</option><option>Punjab National Bank</option><option>Union Bank of India</option><option>Indian Bank</option><option>IDFC FIRST Bank</option><option>Yes Bank</option><option>Federal Bank</option><option>IndusInd Bank</option></select>
+        <p class="pay__lead">You'll sign in to your bank on the next screen, then come back here.</p>
+      </div>
+
+      <div class="pay__pane" id="pm-wallet" role="tabpanel" aria-labelledby="pt-wallet" hidden>
+        <div class="banks" data-group="wallet">
+          <button type="button" class="bank" data-code="amazonpay" aria-pressed="true">Amazon Pay</button><button type="button" class="bank" data-code="phonepe" aria-pressed="false">PhonePe</button><button type="button" class="bank" data-code="mobikwik" aria-pressed="false">MobiKwik</button>
+          <button type="button" class="bank" data-code="airtelmoney" aria-pressed="false">Airtel Money</button><button type="button" class="bank" data-code="freecharge" aria-pressed="false">Freecharge</button><button type="button" class="bank" data-code="jiomoney" aria-pressed="false">JioMoney</button>
+        </div>
+        <p class="pay__lead">You'll confirm in your wallet on the next screen, then come back here.</p>
+      </div>
+
+      <div class="pay__pane" id="pm-later" role="tabpanel" aria-labelledby="pt-later" hidden>
+        <div class="banks" data-group="later">
+          <button type="button" class="bank" data-code="lazypay" aria-pressed="true">LazyPay</button><button type="button" class="bank" data-code="simpl" aria-pressed="false">Simpl</button><button type="button" class="bank" data-code="icic" aria-pressed="false">ICICI PayLater</button>
+          <button type="button" class="bank" data-code="hdfc" aria-pressed="false">HDFC FlexiPay</button>
+        </div>
+        <p class="pay__lead">Pay ₹999 now with your Pay Later account and settle it later. Approve on the next screen.</p>
+      </div>
+
+      <button type="button" class="cta pay__go" id="payGo">Pay ₹999 with Google Pay</button>
+      <p class="pay__demo" id="payDemo">Preview: nothing is charged. This shows how the new checkout will look and work.</p>
+      <p class="pay__secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Secured by Razorpay &middot; Your card and UPI details go straight to Razorpay</p>
+      <button type="button" class="pay__back" id="payAlt" hidden>Having trouble? Pay in the Razorpay window instead</button>
+      <button type="button" class="pay__back" id="payBack">Back to my details</button>
+    </div>
+    <div class="pay__wait" id="payWait" hidden>
+      <span class="spin" aria-hidden="true"></span>
+      <b id="payWaitH">Waiting for Google Pay</b>
+      <p id="payWaitP">Approve the ₹999 request in the app. Keep this page open.</p>
+      <button type="button" class="pay__back" id="payCancel">Cancel and choose another way</button>
+    </div>
+  </div>
   <div class="reg__done" id="regDone" hidden>
     <span class="om" aria-hidden="true">ॐ</span>
     <h2>Namaskaram, <span id="doneName">friend</span>.</h2>
@@ -2619,7 +2770,7 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
   var CHECKOUT_URL = "https://www.shuddahathayoga.com/_paylink/pVrqlDybWCX4";
   var FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSd1Txmx9OrGNGidEN640pTEs6wpQQv1fE3WsAVBTjpQFP-Srw/formResponse";
   var dlg = document.getElementById("reg"), form = document.getElementById("regForm"), done = document.getElementById("regDone");
-  function openReg(e) { if (e) e.preventDefault(); if (!dlg) return; form.hidden = false; done.hidden = true; if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", ""); var f = form.querySelector("input"); if (f) f.focus({ preventScroll: true }); }
+  function openReg(e) { if (e) e.preventDefault(); if (!dlg) return; form.hidden = false; done.hidden = true; var pe = document.getElementById("regPay"); if (pe) pe.hidden = true; if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", ""); var f = form.querySelector("input"); if (f) f.focus({ preventScroll: true }); }
   function closeReg() { if (dlg.close) dlg.close(); else dlg.removeAttribute("open"); }
   document.querySelectorAll("[data-cta]").forEach(function (a) { a.setAttribute("href", "#register"); a.setAttribute("role", "button"); a.addEventListener("click", openReg); });
   document.getElementById("regClose").addEventListener("click", closeReg);
@@ -2645,7 +2796,7 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
     var btn = document.getElementById("regSubmit"), err = document.getElementById("regErr");
     btn.disabled = true; btn.textContent = "Sending..."; err.hidden = true;
     var preview = /claude|anthropic/i.test(location.hostname) || location.protocol === "about:";
-    (preview ? Promise.resolve() : fetch(FORM_URL, { method: "POST", mode: "no-cors", body: data })).then(function () {
+    (preview || PAYMODE === "demo" || PAYMODE === "test" ? Promise.resolve() : fetch(FORM_URL, { method: "POST", mode: "no-cors", body: data })).then(function () {
       document.getElementById("doneName").textContent = name.value.trim().split(" ")[0] || "friend";
       var sum = document.getElementById("doneSum"); sum.textContent = "";
       [["Batch", batches.map(function (b) { var lab = b.nextElementSibling; return lab.querySelector("b").textContent + " (" + lab.querySelector("small").textContent + ")"; }).join(", ")], ["WhatsApp", phone.value.trim()], ["Dates", BATCH.range], ["Fee", "₹999"]].forEach(function (r) {
@@ -2653,7 +2804,7 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
       });
       var person = { name: name.value.trim(), email: email.value.trim(), phone: phone.value.replace(/\D/g, "").slice(-10), batch: BATCH.rangeShort + " " + BATCH.y + " | " + batches.map(function (b) { return b.value; }).join(", ") };
       form.reset(); form.hidden = true;
-      if (preview) { showDone("pending", null, "Preview only: nothing was sent. On your live website the Razorpay payment opens here."); return; }
+      if (preview || NEWPAY) { lastPerson = person; showPay(person, batches); return; }
       return startPayment(person);
     }).catch(function () {
       err.textContent = "We could not send your registration. Please check your internet connection and try again, or WhatsApp us on 9391020729."; err.hidden = false;
@@ -2661,6 +2812,182 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
   });
 
   var lastPerson = null;
+  /* ---------- themed checkout preview (step 2 inside the form) ---------- */
+  /* PAYMODE: "demo" = nothing charged (previews, ?checkout=new); "test" = real Razorpay Test Mode (?checkout=test);
+     "live" = real payments with the themed checkout (switch CUSTOM_LIVE on once tested); "off" = classic Razorpay window. */
+  var CUSTOM_LIVE = true;
+  var isPreview = /claude|anthropic/i.test(location.hostname) || location.protocol === "about:";
+  var PAYMODE = isPreview || /[?&]checkout=new\b/.test(location.search) ? "demo" : /[?&]checkout=test\b/.test(location.search) ? "test" : CUSTOM_LIVE ? "live" : "off";
+  var NEWPAY = PAYMODE !== "off";
+  var payEl = document.getElementById("regPay"), payMain = document.getElementById("payMain"), payWait = document.getElementById("payWait"), payGo = document.getElementById("payGo");
+  var mobile = matchMedia("(pointer: coarse)").matches || innerWidth < 760;
+  [].forEach.call(payEl.querySelectorAll("[data-mob]"), function (x) { x.hidden = !mobile; });
+  [].forEach.call(payEl.querySelectorAll("[data-desk]"), function (x) { x.hidden = mobile; });
+  var method = "upi", app = "Google Pay", bank = "SBI", qrTimer = null;
+  function label() {
+    if (method === "upi") return mobile ? "Pay ₹999 with " + app : "I've paid · Check status";
+    if (method === "card") return "Pay ₹999 securely";
+    if (method === "wallet") return "Pay ₹999 with " + walletName;
+    if (method === "later") return "Pay ₹999 with " + laterName;
+    return "Pay ₹999 with " + bank;
+  }
+  function setLabel() { payGo.textContent = label(); }
+  function startQr() {
+    clearInterval(qrTimer); var left = 600, el = document.getElementById("qrT");
+    qrTimer = setInterval(function () { left--; if (left < 0) { clearInterval(qrTimer); return; } el.textContent = Math.floor(left / 60) + ":" + ("0" + (left % 60)).slice(-2); }, 1000);
+  }
+  [].forEach.call(payEl.querySelectorAll('[role="tab"]'), function (t) {
+    t.addEventListener("click", function () {
+      [].forEach.call(payEl.querySelectorAll('[role="tab"]'), function (o) { o.setAttribute("aria-selected", o === t ? "true" : "false"); document.getElementById(o.getAttribute("aria-controls")).hidden = o !== t; });
+      method = t.id.replace("pt-", ""); setLabel();
+    });
+  });
+  function pick(sel, cb) { [].forEach.call(payEl.querySelectorAll(sel), function (b) { b.addEventListener("click", function () { [].forEach.call(payEl.querySelectorAll(sel), function (o) { o.setAttribute("aria-pressed", o === b ? "true" : "false"); }); cb(b); setLabel(); }); }); }
+  pick(".app", function (b) { app = b.getAttribute("data-app"); });
+  pick('[data-group="nb"] .bank', function (b) { bank = b.textContent; payEl.querySelector(".bsel").value = ""; });
+  var wallet = "amazonpay", walletName = "Amazon Pay", later = "lazypay", laterName = "LazyPay";
+  pick('[data-group="wallet"] .bank', function (b) { wallet = b.getAttribute("data-code"); walletName = b.textContent; });
+  pick('[data-group="later"] .bank', function (b) { later = b.getAttribute("data-code"); laterName = b.textContent; });
+  payEl.querySelector(".bsel").addEventListener("change", function (e) { if (!e.target.value) return; bank = e.target.value; [].forEach.call(payEl.querySelectorAll('[data-group="nb"] .bank'), function (o) { o.setAttribute("aria-pressed", "false"); }); setLabel(); });
+  var cnum = document.getElementById("c-num"), cexp = document.getElementById("c-exp"), cvv = document.getElementById("c-cvv"), brand = document.getElementById("c-brand");
+  cnum.addEventListener("input", function () { var d = cnum.value.replace(/\D/g, "").slice(0, 19); cnum.value = d.replace(/(.{4})/g, "$1 ").trim(); brand.textContent = /^4/.test(d) ? "Visa" : /^(5[1-5]|2[2-7])/.test(d) ? "Mastercard" : /^(60|65|81|82|508)/.test(d) ? "RuPay" : /^3[47]/.test(d) ? "Amex" : ""; });
+  cexp.addEventListener("input", function () { var d = cexp.value.replace(/\D/g, "").slice(0, 4); cexp.value = d.length > 2 ? d.slice(0, 2) + " / " + d.slice(2) : d; });
+  cvv.addEventListener("input", function () { cvv.value = cvv.value.replace(/\D/g, "").slice(0, 4); });
+  function showPay(person, batches) {
+    document.getElementById("paySumName").textContent = "Namaskaram, " + (person.name.split(" ")[0] || "friend");
+    document.getElementById("paySumBatch").textContent = BATCH.range + " · " + batches.map(function (b) { return b.nextElementSibling.querySelector("b").textContent; }).join(", ");
+    form.hidden = true; done.hidden = true; payEl.hidden = false; payMain.hidden = false; payWait.hidden = true; setLabel();
+    if (!mobile && PAYMODE === "demo") startQr();
+    if (!dlg.open) { if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", ""); }
+    payMain.scrollTop = 0;
+    document.getElementById("payDemo").textContent = PAYMODE === "demo" ? "Preview: nothing is charged. This shows how the new checkout will look and work." : PAYMODE === "test" ? "Razorpay TEST MODE: use Razorpay test cards or test UPI. No real money moves." : "";
+    document.getElementById("payDemo").hidden = PAYMODE === "live";
+    if (PAYMODE === "test" || PAYMODE === "live") { prepOrder(person); if (!mobile) makeQr(person); }
+  }
+  /* ----- real Razorpay custom checkout (razorpay.js) ----- */
+  var order = null, rzc = null, orderErr = false;
+  function loadScript(src) { return new Promise(function (res, rej) { var sc = document.createElement("script"); sc.src = src; sc.onload = res; sc.onerror = rej; document.head.appendChild(sc); }); }
+  var customLoading = null, RzCustom = null;
+  function loadCustom() {
+    if (RzCustom) return Promise.resolve(RzCustom);
+    if (!customLoading) customLoading = loadScript("https://checkout.razorpay.com/v1/razorpay.js").then(function () { RzCustom = window.Razorpay; try { delete window.Razorpay; } catch (e) { window.Razorpay = undefined; } return RzCustom; });
+    return customLoading;
+  }
+  function prepOrder(person) {
+    order = null; orderErr = false; payGo.disabled = true; payGo.textContent = "Preparing secure payment...";
+    var body = Object.assign({}, person, { mode: PAYMODE === "test" ? "test" : "live" });
+    Promise.all([loadCustom(), fetch(ORDER_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then(function (r) { if (!r.ok) throw new Error("order"); return r.json(); })])
+      .then(function (res) {
+        order = res[1]; if (!order || !order.orderId) throw new Error("order");
+        rzc = new RzCustom({ key: order.keyId });
+        rzc.on("payment.success", function (r) { payDone(r); });
+        rzc.on("payment.error", function (e) { payFail(e && e.error && e.error.description); });
+        if (mobile && rzc.getSupportedUpiIntentApps) {
+          rzc.getSupportedUpiIntentApps().then(function (apps) {
+            var codes = (apps || []).map(function (a) { return String(typeof a === "string" ? a : (a.shortcode || a.app || a.name || a.package_name || "")).toLowerCase(); }).join(" ");
+            if (!codes) return;
+            [].forEach.call(payEl.querySelectorAll(".app"), function (b) { var c = b.getAttribute("data-code"); if (c !== "any" && codes.indexOf(c) < 0) b.hidden = true; });
+          }).catch(function () {});
+        }
+        payGo.disabled = false; setLabel(); document.getElementById("payAlt").hidden = PAYMODE === "demo";
+      })
+      .catch(function () { orderErr = true; payGo.disabled = false; payGo.textContent = "Try again"; if (PAYMODE === "live") { payEl.hidden = true; startPayment(lastPerson); } });
+  }
+  var BANKS = { "SBI": "SBIN", "HDFC": "HDFC", "ICICI": "ICIC", "Axis": "UTIB", "Kotak": "KKBK", "Canara": "CNRB", "Bank of Baroda": "BARB_R", "Punjab National Bank": "PUNB_R", "Union Bank of India": "UBIN", "Indian Bank": "IDIB", "IDFC FIRST Bank": "IDFB", "Yes Bank": "YESB", "Federal Bank": "FDRL", "IndusInd Bank": "INDB" };
+  function realPay() {
+    if (orderErr || !order) { prepOrder(lastPerson); return; }
+    var base = { amount: order.amount, currency: order.currency || "INR", order_id: order.orderId, email: lastPerson.email, contact: "+91" + lastPerson.phone, notes: { batch: lastPerson.batch } };
+    if (method === "upi" && !mobile) { checkQr(true); return; }
+    try {
+      if (method === "upi") {
+        var code = (payEl.querySelector('.app[aria-pressed="true"]') || {}).getAttribute ? payEl.querySelector('.app[aria-pressed="true"]').getAttribute("data-code") : "any";
+        rzc.createPayment(Object.assign({ method: "upi" }, base), code && code !== "any" ? { app: code } : {});
+      } else if (method === "card") {
+        var ex = cexp.value.replace(/\D/g, "");
+        rzc.createPayment(Object.assign({ method: "card", "card[number]": cnum.value.replace(/\D/g, ""), "card[expiry_month]": ex.slice(0, 2), "card[expiry_year]": ex.slice(2, 4), "card[cvv]": cvv.value, "card[name]": document.getElementById("c-name").value.trim() || lastPerson.name }, base));
+      } else if (method === "wallet") {
+        rzc.createPayment(Object.assign({ method: "wallet", wallet: wallet }, base));
+      } else if (method === "later") {
+        rzc.createPayment(Object.assign({ method: "paylater", provider: later }, base));
+      } else {
+        rzc.createPayment(Object.assign({ method: "netbanking", bank: BANKS[bank] || bank }, base));
+      }
+    } catch (e) { payFail(); }
+  }
+  /* desktop UPI: Razorpay's own QR window, limited to UPI QR */
+  function qrStandard() {
+    loadRzp().then(function () {
+      var w = new window.Razorpay({ key: order.keyId, order_id: order.orderId, amount: order.amount, currency: order.currency || "INR", name: "Shudda Hathayoga", description: "Dhriti 21-Day Online Sadhana · " + BATCH.rangeShort,
+        prefill: { name: lastPerson.name, email: lastPerson.email, contact: "+91" + lastPerson.phone }, theme: { color: "#014B3F", backdrop_color: "#04211C" },
+        config: { display: { blocks: { upi: { name: "Scan to pay with UPI", instruments: [{ method: "upi", flows: ["qr"] }] } }, sequence: ["block.upi"], preferences: { show_default_blocks: false } } },
+        modal: { ondismiss: function () { payFail("Payment not completed yet."); } },
+        handler: function (r) { payDone(r); } });
+      w.open();
+    }).catch(function () { payFail(); });
+  }
+  /* desktop UPI: a real Razorpay QR shown inside the form; the page checks every few seconds */
+  var QR_URL = ORDER_URL.replace("razorpayOrder", "razorpayQr"), QRS_URL = ORDER_URL.replace("razorpayOrder", "razorpayQrStatus");
+  var qr = null, qrPoll = null, qrBusy = false;
+  function makeQr(person) {
+    clearInterval(qrPoll); qr = null;
+    var img = document.getElementById("qrImg"); img.hidden = true;
+    var box = document.getElementById("qrBox"); [].forEach.call(box.querySelectorAll("svg, em"), function (x) { x.style.visibility = "hidden"; });
+    img.onload = function () { box.style.width = "180px"; box.style.height = "180px"; };
+    fetch(QR_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.assign({}, person, { mode: PAYMODE === "test" ? "test" : "live" })) })
+      .then(function (r) { if (!r.ok) throw new Error("qr"); return r.json(); })
+      .then(function (q) {
+        if (!q || !q.qrId) throw new Error("qr");
+        qr = q; img.src = q.image; img.hidden = false; startQr();
+        qrPoll = setInterval(function () { if (!payEl.hidden && method === "upi") checkQr(false); }, 3500);
+      })
+      .catch(function () { var t = document.querySelector(".qr p b"); if (t) t.textContent = "QR not available right now"; var tt = document.getElementById("qrT"); if (tt) tt.parentNode.textContent = "Please use Card or Netbanking, or the Razorpay window below."; });
+  }
+  function checkQr(manual) {
+    if (!qr || qrBusy) { if (manual && !qr) payFail("The QR code is still loading."); return; }
+    qrBusy = true;
+    fetch(QRS_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ qrId: qr.qrId, mode: PAYMODE === "test" ? "test" : "live" }) })
+      .then(function (r) { return r.json(); })
+      .then(function (s) {
+        qrBusy = false;
+        if (s && s.paid) { clearInterval(qrPoll); clearInterval(qrTimer); payEl.hidden = true; showDone("paid", s.paymentId, PAYMODE === "test" ? "Test Mode payment: no real money moved." : ""); return; }
+        if (manual) { var e = document.getElementById("payDemo"); e.hidden = false; e.textContent = "We haven't received the payment yet. Scan the code and approve ₹999 in your UPI app; this page updates by itself."; }
+      })
+      .catch(function () { qrBusy = false; });
+  }
+  function payDone(r) {
+    payEl.hidden = true; showDone("paid", r && r.razorpay_payment_id, PAYMODE === "test" ? "Test Mode payment: no real money moved." : "");
+    var v = Object.assign({}, r, { mode: PAYMODE === "test" ? "test" : "live" });
+    fetch(VERIFY_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(v) }).catch(function () {});
+  }
+  var fails = 0;
+  function payFail(msg) {
+    fails++;
+    payWait.hidden = true; payMain.hidden = false;
+    var alt = document.getElementById("payAlt"); alt.hidden = false; alt.className = fails > 1 ? "cta pay__go" : "pay__back";
+    if (/website|domain|referer|not allowed|merchant/i.test(msg || "") && order) { loadRzp().then(function () { openRzp(order, lastPerson); }).catch(function () { fallback(); }); return; }
+    var e = document.getElementById("payDemo"); e.hidden = false; e.textContent = (msg || "The payment did not go through.") + " Please try again or choose another method.";
+    prepOrder(lastPerson);
+  }
+  payGo.addEventListener("click", function () {
+    if (method === "card") {
+      var ok = cnum.value.replace(/\D/g, "").length >= 12 && /^\d{2} \/ \d{2}$/.test(cexp.value) && cvv.value.length >= 3;
+      [cnum, cexp, cvv].forEach(function (x) { x.setAttribute("aria-invalid", ok ? "false" : (x.value ? "false" : "true")); });
+      if (!ok) { (cnum.value ? (cexp.value ? cvv : cexp) : cnum).focus(); return; }
+    }
+    var h = document.getElementById("payWaitH"), p = document.getElementById("payWaitP");
+    if (method === "upi") { h.textContent = mobile ? "Waiting for " + app : "Checking your payment"; p.textContent = mobile ? "Approve the ₹999 request in " + app + ", then come back to this page." : "Looking for your UPI payment. This takes a few seconds."; }
+    else if (method === "card") { h.textContent = "Connecting to your bank"; p.textContent = "Your bank will ask for an OTP to approve ₹999."; }
+    else if (method === "wallet") { h.textContent = "Opening " + walletName; p.textContent = "Confirm ₹999 in your wallet, then you'll return here."; }
+    else if (method === "later") { h.textContent = "Opening " + laterName; p.textContent = "Approve ₹999 with your Pay Later account, then you'll return here."; }
+    else { h.textContent = "Opening " + bank; p.textContent = "Sign in to your bank to approve ₹999, then you'll return here."; }
+    payMain.hidden = true; payWait.hidden = false;
+    if (PAYMODE !== "demo") { if (method === "upi" && !mobile) { payWait.hidden = true; payMain.hidden = false; } realPay(); return; }
+    setTimeout(function () { clearInterval(qrTimer); payEl.hidden = true; showDone("paid", "pay_PREVIEW123", "Preview: no money was taken."); }, 2600);
+  });
+  document.getElementById("payCancel").addEventListener("click", function () { try { if (rzc) rzc.emit("payment.cancel"); } catch (e) {} payWait.hidden = true; payMain.hidden = false; if (PAYMODE !== "demo") prepOrder(lastPerson); });
+  document.getElementById("payAlt").addEventListener("click", function () { if (!order) return; loadRzp().then(function () { openRzp(order, lastPerson); }).catch(function () { fallback(); }); });
+  document.getElementById("payBack").addEventListener("click", function () { clearInterval(qrTimer); clearInterval(qrPoll); payEl.hidden = true; form.hidden = false; });
+  document.getElementById("payClose").addEventListener("click", function () { clearInterval(qrTimer); clearInterval(qrPoll); closeReg(); });
   function showDone(state, payId, note) {
     var h = done.querySelector("h2"), msg = document.getElementById("doneMsg"), pay = document.getElementById("payBtn"), auto = document.getElementById("payAuto");
     if (state === "paid") {
@@ -2675,7 +3002,7 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
     }
     auto.hidden = !note; auto.textContent = note || "";
     if (!dlg.open) { if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", ""); }
-    form.hidden = true; done.hidden = false;
+    form.hidden = true; done.hidden = false; if (payEl) payEl.hidden = true;
   }
   var rzpLoading = null;
   function loadRzp() {
