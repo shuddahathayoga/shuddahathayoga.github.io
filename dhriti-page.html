@@ -3028,8 +3028,34 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
       openRzp(o, person);
     }).catch(function () { fallback(); });
   }
+  /* Payment bridge: on www.shuddahathayoga.com the Razorpay window is opened by the Wix page itself
+     (snippet "Dhriti payment bridge"), so Razorpay sees the approved domain. Falls back to opening it here. */
+  var bridge = null, bridgeCb = null;
+  if (window.parent !== window) {
+    addEventListener("message", function (e) {
+      if (e.source !== window.parent || !/^https:\/\/(www\.)?shuddahathayoga\.com$/.test(e.origin)) return;
+      var d = e.data || {};
+      if (d.type === "dhriti-pong") { bridge = e.origin; return; }
+      if (bridgeCb) bridgeCb(d);
+    });
+    var ping = function () { try { window.parent.postMessage({ type: "dhriti-ping" }, "*"); } catch (e) {} };
+    ping(); setTimeout(ping, 1500); setTimeout(ping, 5000);
+  }
   function openRzp(o, person) {
     if (dlg.open) closeReg();
+    if (bridge) {
+      bridgeCb = function (d) {
+        if (d.type === "dhriti-paid" && d.r) { bridgeCb = null; showDone("paid", d.r.razorpay_payment_id, ""); fetch(VERIFY_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(d.r) }).catch(function () {}); }
+        else if (d.type === "dhriti-dismiss") { bridgeCb = null; showDone("pending", null, "Payment not completed yet. Tap the button to try again."); }
+        else if (d.type === "dhriti-error") { bridgeCb = null; bridge = null; loadRzp().then(function () { openRzp(o, person); }).catch(function () { fallback(); }); }
+      };
+      window.parent.postMessage({ type: "dhriti-pay", options: {
+        key: o.keyId, order_id: o.orderId, amount: o.amount, currency: o.currency || "INR",
+        name: "Shudda Hathayoga", description: "Dhriti 21-Day Online Sadhana · " + BATCH.rangeShort,
+        prefill: { name: person.name, email: person.email, contact: "+91" + person.phone },
+        notes: { batch: person.batch }, theme: { color: "#014B3F", backdrop_color: "#04211C" } } }, bridge);
+      return;
+    }
     var rzp = new window.Razorpay({
       key: o.keyId, order_id: o.orderId, amount: o.amount, currency: o.currency || "INR",
       name: "Shudda Hathayoga", description: "Dhriti 21-Day Online Sadhana · " + BATCH.rangeShort,
@@ -3052,10 +3078,21 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
     var B = [[3, 30, 5, 0], [6, 0, 7, 30], [8, 0, 9, 30], [16, 0, 17, 30], [18, 0, 19, 30]];
     var IST_TXT = ["3:30 – 5:00 am", "6:00 – 7:30 am", "8:00 – 9:30 am", "4:00 – 5:30 pm", "6:00 – 7:30 pm"];
     var sel = document.getElementById("tz"); if (!sel || !window.Intl) return;
+    var ABBR = { "Asia/Kolkata": ["IST"], "Asia/Dubai": ["GST"], "Asia/Riyadh": ["AST"], "Asia/Qatar": ["AST"], "Asia/Singapore": ["SGT"],
+      "Europe/London": ["GMT", "BST"], "Europe/Berlin": ["CET", "CEST"], "America/New_York": ["EST", "EDT"], "America/Toronto": ["EST", "EDT"],
+      "America/Chicago": ["CST", "CDT"], "America/Los_Angeles": ["PST", "PDT"], "Australia/Sydney": ["AEST", "AEDT"], "Pacific/Auckland": ["NZST", "NZDT"] };
+    function offMin(tz, ms) { var p = {}; new Intl.DateTimeFormat("en-US", { timeZone: tz, hourCycle: "h23", year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" }).formatToParts(new Date(ms)).forEach(function (x) { p[x.type] = +x.value; }); return Math.round((Date.UTC(p.year, p.month - 1, p.day, p.hour % 24, p.minute) - ms) / 60000); }
+    function abbr(tz) {
+      var when = Date.UTC(BATCH.y, BATCH.m, BATCH.d, 0, 0), a = ABBR[tz];
+      if (a) { if (a.length === 1) return a[0]; var y = BATCH.y, jan = offMin(tz, Date.UTC(y, 0, 15)), jul = offMin(tz, Date.UTC(y, 6, 15)), now = offMin(tz, when); return now === Math.min(jan, jul) ? a[0] : a[1]; }
+      try { var n = new Intl.DateTimeFormat("en-US", { timeZone: tz, timeZoneName: "short" }).formatToParts(new Date(when)).filter(function (x) { return x.type === "timeZoneName"; })[0].value; if (n) return n; } catch (e) {}
+      var m = offMin(tz, when), h = Math.floor(Math.abs(m) / 60), mm = Math.abs(m) % 60; return "GMT" + (m < 0 ? "−" : "+") + h + (mm ? ":" + ("0" + mm).slice(-2) : "");
+    }
+    [].forEach.call(sel.options, function (o) { if (o.value !== "auto" && ABBR[o.value]) o.textContent = o.textContent.split(" · ")[0] + " · " + abbr(o.value); });
     var here = "Asia/Kolkata"; try { here = Intl.DateTimeFormat().resolvedOptions().timeZone || here; } catch (e) {}
     if (here === "Asia/Calcutta") here = "Asia/Kolkata";
     var city = here.split("/").pop().replace(/_/g, " ");
-    sel.options[0].textContent = "Your time · " + city;
+    sel.options[0].textContent = "Your time · " + abbr(here);
     var saved = null; try { saved = localStorage.getItem("dhriti-tz"); } catch (e) {}
     sel.value = saved && [].some.call(sel.options, function (o) { return o.value === saved; }) ? saved : (here === "Asia/Kolkata" ? "Asia/Kolkata" : "auto");
     function utc(h, m) { return Date.UTC(BATCH.y, BATCH.m, BATCH.d, h, m) - 330 * 60000; }
@@ -3074,7 +3111,7 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
         heroL = document.querySelector(".hero-times__l"), cbL = document.querySelector(".cbatch__l"), hint = document.getElementById("bt-hint");
     var orig = { slots: slots.map(function (x) { return x.querySelector(".slot__main").innerHTML; }), pills: pills.map(function (x) { return x.innerHTML; }) };
     function apply() {
-      var v = sel.value, tz = v === "auto" ? here : v, ist = tz === "Asia/Kolkata", name = v === "auto" ? city : sel.options[sel.selectedIndex].textContent.split(" · ").pop();
+      var v = sel.value, tz = v === "auto" ? here : v, ist = tz === "Asia/Kolkata", name = abbr(tz);
       try { localStorage.setItem("dhriti-tz", v); } catch (e) {}
       if (sel2 && sel2.value !== v) sel2.value = v;
       var ul = document.querySelector(".slots"); if (ul) ul.classList.toggle("tz-local", !ist);
@@ -3095,9 +3132,9 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
         b.innerHTML = ist ? IST_TXT[i] : r.txt + tag(r.tag);
         if (!ist) { if (!extra) { extra = document.createElement("em"); extra.className = "bt__ist"; lab.appendChild(extra); } extra.textContent = IST_TXT[i] + " IST"; } else if (extra) extra.remove();
       });
-      if (heroL) heroL.innerHTML = ist ? "5 daily batches &middot; 90 min each &middot; IST" : "5 daily batches &middot; 90 min each &middot; " + name + " time";
-      if (cbL) cbL.innerHTML = ist ? "Choose one batch &middot; each session is 90 minutes &middot; IST" : "Choose one batch &middot; 90 minutes &middot; shown in " + name + " time";
-      if (hint) hint.textContent = ist ? "All timings are IST. You can pick more than one." : "Times shown in " + name + " time, with IST below. You can pick more than one.";
+      if (heroL) heroL.innerHTML = ist ? "5 daily batches &middot; 90 min each &middot; IST" : "5 daily batches &middot; 90 min each &middot; " + name;
+      if (cbL) cbL.innerHTML = ist ? "Choose one batch &middot; each session is 90 minutes &middot; IST" : "Choose one batch &middot; each session is 90 minutes &middot; " + name;
+      if (hint) hint.textContent = ist ? "All timings are IST. You can pick more than one." : "Times shown in " + name + ", with IST below. You can pick more than one.";
     }
     var sel2 = document.getElementById("tz2");
     if (sel2) { sel2.innerHTML = sel.innerHTML; sel2.addEventListener("change", function () { sel.value = sel2.value; apply(); }); }
