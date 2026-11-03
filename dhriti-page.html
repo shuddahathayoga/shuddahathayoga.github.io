@@ -2815,7 +2815,7 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
   /* ---------- themed checkout preview (step 2 inside the form) ---------- */
   /* PAYMODE: "demo" = nothing charged (previews, ?checkout=new); "test" = real Razorpay Test Mode (?checkout=test);
      "live" = real payments with the themed checkout (switch CUSTOM_LIVE on once tested); "off" = classic Razorpay window. */
-  var CUSTOM_LIVE = true;
+  var CUSTOM_LIVE = false;
   var isPreview = /claude|anthropic/i.test(location.hostname) || location.protocol === "about:";
   var PAYMODE = isPreview || /[?&]checkout=new\b/.test(location.search) ? "demo" : /[?&]checkout=test\b/.test(location.search) ? "test" : CUSTOM_LIVE ? "live" : "off";
   var NEWPAY = PAYMODE !== "off";
