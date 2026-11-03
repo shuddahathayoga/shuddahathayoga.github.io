@@ -556,6 +556,11 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
   .hero-beat2 { width: auto; right: var(--sc-gutter); bottom: 6vh; }
   .hero-beat2 p { font-size: var(--sc-t-xl); }
 }
+/* tall screens (tablets in portrait, tall browser windows): stack copy above the lotus */
+@media (min-width: 761px) and (max-aspect-ratio: 1/1) {
+  .hero-copy { top: 10vh; translate: none; width: auto; right: calc(var(--sc-gutter) + 2.5rem); max-width: 44rem; }
+  .hero-beat2 { width: auto; right: calc(var(--sc-gutter) + 2.5rem); bottom: 6vh; }
+}
 
 /* ---------- 2 meaning (peak) ---------- */
 .peak .sc-stage { background: var(--bg-peak); display: grid; place-items: center; }
@@ -675,6 +680,14 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
   .details { font-size: var(--sc-t-sm); }
   .close__center { left: 50%; top: auto; bottom: 7vh; translate: -50% 0; }
   .close__center .price { font-size: var(--sc-t-2xl); }
+  .foot { display: none; }
+}
+@media (min-width: 761px) and (max-aspect-ratio: 1/1) {
+  .paths__copy { top: 9vh; translate: none; width: auto; right: calc(var(--sc-gutter) + 2.5rem); max-width: 40rem; }
+}
+@media (min-width: 861px) and (max-aspect-ratio: 1/1) {
+  .close__copy { top: 8vh; translate: none; width: auto; right: calc(var(--sc-gutter) + 2.5rem); max-width: 40rem; }
+  .close__center { left: 50%; top: auto; bottom: 9vh; translate: -50% 0; }
   .foot { display: none; }
 }
 @media (max-width: 860px) and (max-height: 760px) { .details dt:nth-of-type(3), .details dd:nth-of-type(3) { display: none; } .close__center small { display: none; } }
@@ -2485,8 +2498,16 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
   function drawLotus(t) {
     if (!L) return; var ctx = L.ctx, W = L.w, H = L.h; ctx.clearRect(0, 0, W, H);
     var p = reduce ? 0.85 : actP(hero), open = ease(clamp(p * 1.25, 0, 1));
-    var mobile = W < 760;
+    var mobile = W < 760 || H > W;
     var cx = mobile ? W * 0.5 : W * 0.7, cy = mobile ? H * 0.76 : H * 0.6, S = Math.min(W, H) * (mobile ? 0.36 : 0.31) * (1 + open * 0.1);
+    if (mobile) {
+      /* keep the lotus in the free space under the hero copy so it never sits on the text */
+      var hc = document.querySelector(".hero-copy"), cb = H * 0.55;
+      if (hc) { var cr = hc.getBoundingClientRect(), lr = L.c.getBoundingClientRect(); cb = Math.min(H * 0.8, Math.max(H * 0.35, cr.bottom - lr.top + 12)); }
+      var avail = H - cb;
+      S = Math.min(S, avail * 0.4 * (1 + open * 0.1));
+      cy = cb + avail * 0.66;
+    }
     var yaw = (reduce ? 0.4 : t * 0.00012) + p * 0.9, pitch = 0.42 - open * 0.08;
     function proj(q) { var a = rotX(rotY(q, yaw), pitch); var d = 3.2 / (3.2 + a[2]); return [cx + a[0] * S * d, cy - a[1] * S * d, a[2]]; }
 
@@ -2553,7 +2574,7 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
   ];
   function drawOrbit(t) {
     if (!O) return; var ctx = O.ctx, W = O.w, H = O.h; ctx.clearRect(0, 0, W, H);
-    var p = reduce ? 0 : actP(paths), mobile = W < 760;
+    var p = reduce ? 0 : actP(paths), mobile = W < 760 || H > W;
     var cx = mobile ? W * 0.5 : W * 0.66, cy = mobile ? H * 0.68 : H * 0.5, S = Math.min(W, H) * (mobile ? 0.36 : 0.34);
     var active = clamp(Math.floor(p * 4), 0, 3);
     var spin = -clamp(p * 4 - 0.5, 0, 3) * (6.283 / 4) - (reduce ? 0 : t * 0.00005), tilt = 0.38;
@@ -2583,7 +2604,7 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
   var M = makeCanvas("malaring"), closeSec = document.getElementById("register"), litCount = 0, meruLit = false;
   function drawMala(t) {
     if (!M) return; var ctx = M.ctx, W = M.w, H = M.h; ctx.clearRect(0, 0, W, H);
-    var mobile = W < 860, cx = mobile ? W * 0.5 : W * 0.72, cy = mobile ? H * (H < 760 ? 0.76 : 0.74) : H * 0.5;
+    var mobile = W < 860 || H > W, cx = mobile ? W * 0.5 : W * 0.72, cy = mobile ? H * (H < 760 ? 0.76 : 0.74) : H * 0.5;
     var S = Math.min(W * (mobile ? 0.42 : 0.24), H * (mobile ? 0.2 : 0.36));
     var spin = reduce ? 0 : t * 0.00018, tilt = 0.95;
     function proj(q) { var a = rotX(rotY(q, spin), tilt); var d = 3 / (3 + a[2]); return [cx + a[0] * S * d, cy - a[1] * S * d, a[2], d]; }
