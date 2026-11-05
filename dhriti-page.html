@@ -1315,13 +1315,26 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
 .j-nums{padding-block:clamp(2.5rem,6vw,4.5rem)}
 .j h2{margin-bottom:clamp(1.2rem,2.5vw,2rem)}
 .j-foot{padding-bottom:5.5rem}
-.j-mtn{transform:translateY(11vh)}
-@media (max-width:860px){.j-mtn{transform:translateY(14vh)}}
+.j .j-hero{padding-top:0 !important}
 @media (max-width:860px){
  :root{--j-gap:2.75rem}
  .j-times{padding-bottom:3.5rem}
  .j-photo__cap{padding:1.5rem var(--sc-gutter)}
+ .weeks .rail__note{display:none}
 }
+</style>
+<style id="fort-motion">
+/* Fortitude: letters rise, then a slow wave of dawn light passes through the word, and a horizon line draws underneath */
+.j-word .j-letters{position:relative;display:inline-block;padding-bottom:0.12em;letter-spacing:calc(-0.02em + var(--sc-p,0) * 0.05em)}
+.j-word .j-letters .ch{transform-origin:50% 90%}
+.j-word .j-letters.go .ch{animation:fortGlint 5.2s ease-in-out infinite;animation-delay:calc(1.4s + var(--i,0) * 0.11s)}
+@keyframes fortGlint{0%,22%,100%{color:var(--d-ink);text-shadow:none;transform:none}
+ 9%{color:#FBD3C0;text-shadow:0 0 18px rgba(242,166,90,.75),0 0 46px rgba(242,166,90,.35);transform:translateY(-0.05em) scale(1.035)}}
+.j-word .j-letters::after{content:"";position:absolute;left:8%;right:8%;bottom:0;height:2px;border-radius:2px;
+ background:linear-gradient(90deg,transparent,rgba(242,166,90,.95) 20%,#FBD3C0 50%,rgba(242,166,90,.95) 80%,transparent);
+ transform:scaleX(0);transition:transform 1.4s cubic-bezier(.2,.8,.2,1) .9s;box-shadow:0 0 14px rgba(242,166,90,.6)}
+.j-word .j-letters.go::after{transform:scaleX(1)}
+@media (prefers-reduced-motion: reduce){.j-word .j-letters.go .ch{animation:none}.j-word .j-letters::after{transition:none;transform:scaleX(1)}}
 </style>
 <main id="top" class="j">
 
@@ -3463,7 +3476,7 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
     var c = document.getElementById(id); if (!c) return null;
     var ctx = c.getContext("2d"), o = { c: c, ctx: ctx, w: 0, h: 0, vis: true };
     function size() { var r = c.getBoundingClientRect(); if (o.w && Math.abs(r.width - o.w) < 1 && Math.abs(r.height - o.h) < 1) return; o.w = r.width; o.h = r.height; c.width = Math.round(r.width * DPR); c.height = Math.round(r.height * DPR); ctx.setTransform(DPR, 0, 0, DPR, 0, 0); o.dirty = true; }
-    size(); addEventListener("resize", size);
+    size(); addEventListener("resize", size); if (window.ResizeObserver) new ResizeObserver(function () { size(); }).observe(c); setTimeout(size, 400); setTimeout(size, 1500);
     if ("IntersectionObserver" in window) new IntersectionObserver(function (e) { o.vis = e[0].isIntersecting; }).observe(c);
     return o;
   }
@@ -3495,13 +3508,17 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
       var hc = document.querySelector(".j-hero__copy"), cb = H * 0.55;
       ctx.globalAlpha = 1;
       if (hc) {
-        if (!L.cbAt || t - L.cbAt > 150 || L.cbH !== H) { var cr = hc.getBoundingClientRect(), lr = L.c.getBoundingClientRect(); L.cb = cr.bottom - lr.top + 12; L.op = parseFloat(getComputedStyle(hc).opacity) || 0; L.cbAt = t; L.cbH = H; }
-        if (L.cb > H * 0.8) { cb = H * 0.55; ctx.globalAlpha = clamp(1 - L.op * 1.6, 0, 1); }  /* no room under the copy: the lotus waits until the copy has faded */
+        if (!L.cbAt || t - L.cbAt > 150 || L.cbH !== H) { var cr = hc.getBoundingClientRect(), lr = L.c.getBoundingClientRect(); L.cb = cr.bottom - lr.top + 12; L.ct = cr.top - lr.top - 8; L.op = parseFloat(getComputedStyle(hc).opacity) || 0; L.cbAt = t; L.cbH = H; }
+        if (L.cb > H * 0.86) { cb = H * 0.55;
+          if (L.ct > H * 0.2) { /* no room under the copy: the lotus opens in the space above it, then glides down as the copy fades */
+            var avN = H - cb, sN = Math.min(S, avN * 0.4 * (1 + open * 0.1)), yN = cb + avN * 0.66, sT = Math.min(W * 0.17, L.ct * 0.34), yT = L.ct * 0.74, k = L.op;
+            S = sN + (sT - sN) * k; cy = yN + (yT - yN) * k; L.topMode = true;
+          } else { ctx.globalAlpha = clamp(1 - L.op * 1.6, 0, 1); L.topMode = false; } }
         else cb = H * 0.3 + (Math.max(H * 0.35, L.cb) - H * 0.3) * L.op;
       }
-      var avail = H - cb;
+      if (!L.topMode || !(L.cb > H * 0.86)) { var avail = H - cb;
       S = Math.min(S, avail * 0.4 * (1 + open * 0.1));
-      cy = cb + avail * 0.66;
+      cy = cb + avail * 0.66; }
     }
     var yaw = (reduce ? 0.4 : t * 0.00012) + p * 0.9, pitch = 0.42 - open * 0.08;
     function proj(q) { var a = rotX(rotY(q, yaw), pitch); var d = 3.2 / (3.2 + a[2]); return [cx + a[0] * S * d, cy - a[1] * S * d, a[2]]; }
@@ -3822,7 +3839,7 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
     /* engine drives the hero now */
     /* 2 letters */
     var L = document.querySelector(".j-letters");
-    if (L) { var txt = L.textContent; L.textContent = ""; txt.split("").forEach(function (c, i) { var sp = document.createElement("span"); sp.className = "ch"; sp.setAttribute("aria-hidden", "true"); sp.textContent = c; sp.style.transitionDelay = (i * 55) + "ms"; L.appendChild(sp); }); }
+    if (L) { var txt = L.textContent; L.textContent = ""; txt.split("").forEach(function (c, i) { var sp = document.createElement("span"); sp.className = "ch"; sp.setAttribute("aria-hidden", "true"); sp.textContent = c; sp.style.transitionDelay = (i * 55) + "ms"; sp.style.setProperty("--i", i); L.appendChild(sp); }); }
     /* 3 count up */
     var counts = [].slice.call(document.querySelectorAll("[data-count]"));
     function countUp(el) { var to = +el.getAttribute("data-count"), pre = el.getAttribute("data-prefix") || "", s0 = performance.now(), d = 1400; if (rm) { el.textContent = pre + to; return; } (function f(t) { var k = Math.min(1, (t - s0) / d), v = Math.round(to * (1 - Math.pow(1 - k, 3))); el.textContent = pre + v; if (k < 1) requestAnimationFrame(f); })(s0); }
@@ -3860,7 +3877,7 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
     var phone = matchMedia("(pointer: coarse)").matches || innerWidth < 760, dpr = Math.min(phone ? 1.25 : 2, devicePixelRatio || 1);
     var W = 0, H = 0, vis = false, fN = 0;
     function size() { var r = cv.getBoundingClientRect(); if (Math.abs(r.width - W) < 1 && Math.abs(r.height - H) < 1) return; W = r.width; H = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); }
-    addEventListener("resize", size); size();
+    addEventListener("resize", size); size(); if (window.ResizeObserver) new ResizeObserver(function () { size(); }).observe(cv);
     new IntersectionObserver(function (e) { vis = e[0].isIntersecting; }).observe(cv);
     /* geometry: rings x segments heightfield with ridges and a little noise */
     var RINGS = phone ? 11 : 15, SEG = phone ? 30 : 40, V = [];
