@@ -789,7 +789,7 @@ $("#pay").addEventListener("click",function(){var b=$("#pay");if(b.classList.con
   var payload=Object.assign({},booking);delete payload.rows;
   Promise.all([post("sessionOrder",payload),loadRzp()]).then(function(r){var o=r[0];
     var rz=new Razorpay({key:o.keyId,order_id:o.orderId,amount:o.amount,currency:o.currency||"INR",name:"Shudda Hathayoga",description:"Personal sessions · "+booking.rows[1][1].slice(0,60),
-      prefill:{name:booking.name,email:booking.email,contact:booking.phone.replace(/[^\d+]/g,"")},notes:{code:booking.code},theme:{color:"#E8924A"},
+      prefill:{name:booking.name,email:booking.email,contact:booking.phone.replace(/[^\d+]/g,"")},notes:{code:booking.code},theme:{color:"#014B3F",backdrop_color:"#04211C"},
       modal:{ondismiss:function(){b.classList.remove("busy")}},
       handler:function(resp){post("sessionVerify",Object.assign({mode:MODE},resp)).then(function(v){b.classList.remove("busy");if(v.verified)paid(resp.razorpay_payment_id,o.test);else payErr("We could not confirm this payment. If money was taken, message us on WhatsApp with Payment ID "+resp.razorpay_payment_id+" and we will sort it out.")})
         .catch(function(){b.classList.remove("busy");payErr("Your payment went through to Razorpay, but our confirmation did not reach us. Message us on WhatsApp with Payment ID "+resp.razorpay_payment_id+".")})}});
