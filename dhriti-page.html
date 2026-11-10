@@ -1308,10 +1308,10 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
 .snav{position:fixed;z-index:61;top:calc(env(safe-area-inset-top,0px) + 12px);right:calc(var(--sc-gutter,16px) - 12px);display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:rgba(4,33,28,.78);box-shadow:inset 0 0 0 1px rgba(255,246,239,.12),0 6px 20px -8px rgba(0,0,0,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-family:var(--sc-font-body,inherit)}
 .snav a,.snav button{display:inline-flex;align-items:center;min-height:36px;padding:.4rem .85rem;border-radius:999px;color:#D6E3DE;text-decoration:none;font-size:.88rem;background:none;border:0;cursor:pointer;font-family:inherit;white-space:nowrap;transition:background .2s,color .2s}
 .snav a:hover,.snav button:hover{color:#FFF6EF;background:rgba(255,246,239,.06)}
-.snav a.hl{color:#1D0E03;background:linear-gradient(180deg,#F6B472,#E8924A)}
+.snav a[aria-current="page"]{color:#FFF6EF;background:rgba(242,166,90,.14);box-shadow:inset 0 0 0 1px rgba(242,166,90,.5)}
 .snav a:focus-visible,.snav button:focus-visible{outline:2px solid #F2A65A;outline-offset:2px}
 .snav .snav-btn{display:none}
-@media (max-width:900px){
+@media (max-width:1060px){
   .snav{padding:4px}
   .snav .snav-links{display:none;position:absolute;right:0;top:calc(100% + 8px);flex-direction:column;align-items:stretch;min-width:220px;padding:8px;border-radius:18px;background:rgba(3,26,22,.97);box-shadow:inset 0 0 0 1px rgba(255,246,239,.12),0 20px 40px -12px rgba(0,0,0,.6)}
   .snav.open .snav-links{display:flex}
@@ -1319,16 +1319,15 @@ canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: bl
   .snav .snav-btn{display:inline-flex;min-height:40px}
 }
 .snav-links{display:flex;gap:2px}
-.snav .m-only{display:none}
-@media (max-width:560px){.mark{font-size:0!important;gap:0!important;padding:9px!important}.mark svg{width:24px;height:24px}.snav a.hl{padding:.4rem .8rem;font-size:.86rem}}
-@media (max-width:330px){.snav>a.hl{display:none}.snav .m-only{display:inline-flex}}
+
+
 </style>
 <nav class="snav" id="snav" aria-label="Site">
-  <a class="hl" href="https://www.shuddahathayoga.com/personal-classes" target="_top">Personal classes</a>
   <button class="snav-btn" type="button" aria-expanded="false" aria-controls="snav-links">Menu</button>
   <div class="snav-links" id="snav-links">
-    <a class="hl m-only" href="https://www.shuddahathayoga.com/personal-classes" target="_top">Personal classes</a>
-    <a href="https://www.shuddahathayoga.com/programs" target="_top">Dhriti Mandala</a>
+    <a href="https://www.shuddahathayoga.com/" target="_top" aria-current="page">Dhriti</a>
+    <a href="https://www.shuddahathayoga.com/personal-classes" target="_top">Personal classes</a>
+    <a href="https://www.shuddahathayoga.com/programs" target="_top">Dhriti Mandala Program</a>
     <a href="https://www.shuddahathayoga.com/classes" target="_top">Programs</a>
     <a href="https://www.shuddahathayoga.com/instructors" target="_top">Teachers</a>
     <a href="https://www.shuddahathayoga.com/contact-10" target="_top">Contact</a>
@@ -1632,7 +1631,7 @@ document.addEventListener("DOMContentLoaded",function(){
     </div>
   </section>
 
-  <footer class="j-foot"><span>Shudda Hathayoga &middot; Classical Hatha Yoga since 2017</span><span>Hyderabad &middot; Nellore &middot; Chittoor &middot; Hosur &middot; Kochi</span></footer>
+  <footer class="j-foot"><span>Shudda Hathayoga &middot; Classical Hatha Yoga since 2017</span><span>Hyderabad &middot; Nellore &middot; Chittoor &middot; Hosur &middot; Kochi</span><span class="j-legal"><a href="https://www.shuddahathayoga.com/refunds" target="_top">Refund policy</a> &middot; <a href="https://www.shuddahathayoga.com/return-policy" target="_top">Returns</a> &middot; <a href="https://www.shuddahathayoga.com/copy-of-return-policy" target="_top">Shipping</a> &middot; <a href="https://www.shuddahathayoga.com/privacypolicy" target="_top">Privacy</a> &middot; <a href="https://www.shuddahathayoga.com/terms" target="_top">Terms</a> &middot; <a href="https://www.shuddahathayoga.com/contact-10" target="_top">Contact</a></span></footer><style>.j-foot{flex-wrap:wrap}.j-legal{flex-basis:100%}.j-legal a{color:inherit;text-decoration:underline;text-underline-offset:3px}.j-legal a:hover{color:#FFF6EF}</style>
 </main>
 
 <!-- sticky register bar -->
