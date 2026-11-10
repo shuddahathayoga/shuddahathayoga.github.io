@@ -542,7 +542,7 @@ function lsize(){var r=LC.getBoundingClientRect();LW=r.width;LH=r.height;LC.widt
 lsize();addEventListener("resize",lsize);if(window.ResizeObserver)new ResizeObserver(lsize).observe(LC);
 var lvis=true;if("IntersectionObserver" in window)new IntersectionObserver(function(e){lvis=e[0].isIntersecting}).observe(LC);
 var RINGS=[{n:8,len:.62,wid:.30,closed:.18,open:.62,cup:.20,off:0,c0:PAL.petal[0][0],c1:PAL.petal[0][1]},{n:10,len:.82,wid:.34,closed:.26,open:1.02,cup:.18,off:.31,c0:PAL.petal[1][0],c1:PAL.petal[1][1]},{n:12,len:.98,wid:.36,closed:.34,open:1.34,cup:.15,off:.13,c0:PAL.petal[2][0],c1:PAL.petal[2][1]}];
-var US=PHONE?8:12,VS=PHONE?5:8,LIGHT=nrm([-.4,.8,-.6]);
+var US=PHONE?8:10,VS=PHONE?5:6,LIGHT=nrm([-.4,.8,-.6]);
 function petalPoint(r,u,v,tilt){var w=r.wid*Math.pow(Math.sin(Math.PI*Math.min(u,.999)),.85)*(1-.35*u*u);var p=rotX([v*w,u*r.len,-r.cup*(1-v*v)*Math.sin(Math.PI*u)+.06*u*u],tilt);return [p[0],p[1],p[2]+.12]}
 var parts=[];for(var pi=0;pi<(PHONE?50:90);pi++)parts.push({x:Math.random()*2-1,y:Math.random(),z:Math.random()*2-1,s:.4+Math.random()*1.4,v:.02+Math.random()*.05,ph:Math.random()*6.28});
 var mx=0,my=0;
@@ -589,7 +589,23 @@ if(!reduce){
   addEventListener("pointermove",function(e){mx=e.clientX/innerWidth*2-1;my=e.clientY/innerHeight*2-1},{passive:true});
   var heroT=.35,howV=0,useMS=false;
   if(M&&M.scroll){try{M.scroll(function(p){heroT=.35+p*.65},{target:$(".hero"),offset:["start start","end start"]});M.scroll(function(p){howV=p},{target:how,offset:["start start","end end"]});useMS=true}catch(e){useMS=false}}
-  (function loop(ts){clock=ts/1000;if(!useMS){heroT=Math.min(1,.35+scrollY/(innerHeight*.7)*.65);howV=howP()}heroP+=(heroT-heroP)*.08;lotus(heroP,clock);drumAt(howV);requestAnimationFrame(loop)})(0);
+  var hvis=true;if("IntersectionObserver" in window)new IntersectionObserver(function(e){hvis=e[0].isIntersecting}).observe(how);
+  var fN=0,SKIP=PHONE?2:1,COST=0,lastT=0;
+  (function loop(ts){var dt=lastT?Math.min(50,ts-lastT):16.7;lastT=ts;clock=ts/1000;if(!useMS){heroT=Math.min(1,.35+scrollY/(innerHeight*.7)*.65);howV=howP()}
+    heroP+=(heroT-heroP)*(1-Math.exp(-dt*.005));
+    /* adaptive pacing: paint the lotus every 2nd or 3rd frame on slower devices so scrolling stays at full rate */
+    if(lvis&&(fN++%SKIP)===0){var t0=performance.now();lotus(heroP,clock);COST=COST*.85+(performance.now()-t0)*.15;SKIP=Math.max(PHONE?2:1,COST>11?3:COST>5.5?2:1)}
+    if(hvis)drumAt(howV);requestAnimationFrame(loop)})(0);
+  /* smooth wheel scrolling for mouse and trackpad on desktop only; phones keep native scrolling */
+  (function(){try{if(!matchMedia("(pointer: fine) and (hover: hover)").matches)return}catch(e){return}
+    var target=scrollY,cur=scrollY,raf=0,mine=false,lt=0;
+    function maxY(){return Math.max(0,document.documentElement.scrollHeight-innerHeight)}
+    function blocked(el){if(document.querySelector("dialog[open]"))return true;for(var n=el;n&&n!==document.body&&n.nodeType===1;n=n.parentElement){var cs=getComputedStyle(n);if(/(auto|scroll)/.test(cs.overflowY)&&n.scrollHeight>n.clientHeight+1)return true}return false}
+    function tick(now){var dt=lt?Math.min(50,now-lt):16.7;lt=now;cur+=(target-cur)*(1-Math.exp(-dt*.0068));if(Math.abs(target-cur)<.4)cur=target;mine=true;scrollTo({top:cur,behavior:"instant"});
+      if(cur!==target)raf=requestAnimationFrame(tick);else{raf=0;lt=0;setTimeout(function(){mine=false},50)}}
+    addEventListener("wheel",function(e){if(e.ctrlKey||e.defaultPrevented||Math.abs(e.deltaX)>Math.abs(e.deltaY)||blocked(e.target))return;e.preventDefault();
+      if(!raf)cur=target=scrollY;var d=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?innerHeight:1);target=Math.max(0,Math.min(maxY(),target+d));if(!raf)raf=requestAnimationFrame(tick)},{passive:false});
+    addEventListener("scroll",function(){if(!raf&&!mine)cur=target=scrollY},{passive:true})})();
   if(matchMedia("(pointer: fine)").matches){document.addEventListener("pointermove",function(e){var c=e.target.closest&&e.target.closest(".pick,.fmt");$$(".pick.tilt,.fmt.tilt").forEach(function(x){if(x!==c){x.classList.remove("tilt");x.style.removeProperty("--rx");x.style.removeProperty("--ry")}});
     if(!c)return;var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.classList.add("tilt");c.style.setProperty("--rx",(-y*7).toFixed(2)+"deg");c.style.setProperty("--ry",(x*9).toFixed(2)+"deg")},{passive:true})}
 }else{chaps.forEach(function(c){c.classList.add("on")})}
