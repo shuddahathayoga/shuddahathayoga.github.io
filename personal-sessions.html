@@ -294,13 +294,12 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
 .fm .rv{transition:none}
 .fm .pick.rv.on,.fm .fmt.rv.on{transition:transform .25s var(--ease),border-color .25s,background .25s}
 /* ===== 3D: cards tilt and rise ===== */
-.grid,.formats{perspective:1400px}
+.grid,.formats{perspective:none}
 @media (prefers-reduced-motion:no-preference){
-  .pick.rv,.fmt.rv{transform:translateY(34px) rotateX(16deg);transform-origin:50% 100%}
-  .pick.rv.on,.fmt.rv.on{transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
-  .pick.rv.on:hover,.fmt.rv.on:hover{transform:translateY(-3px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
-  .pick,.fmt{transform-style:preserve-3d;will-change:transform}
-  .pick h3,.fmt .num{transform:translateZ(18px)}
+  .pick.rv,.fmt.rv{transform:perspective(900px) translateY(34px) rotateX(16deg);transform-origin:50% 100%}
+  .pick.rv.on,.fmt.rv.on{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+  .pick.rv.on:hover,.fmt.rv.on:hover{transform:perspective(900px) translateY(-3px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+  .pick,.fmt{will-change:transform}
 }
 
 footer{border-top:1px solid var(--line);color:var(--soft);font-size:.82rem}
@@ -508,7 +507,7 @@ if(M&&M.animate&&M.inView&&!reduce){try{
   var SPR={type:"spring",stiffness:110,damping:17,mass:.9};
   var settle=function(el){el.style.transform="";el.style.opacity="";el.style.filter="";el.classList.add("on")};
   FM=function(el){var d=parseFloat(getComputedStyle(el).getPropertyValue("--d"))||0;
-    var stop=M.inView(el,function(){M.animate(el,{opacity:[0,1],y:[36,0],rotateX:[el.matches(".pick,.fmt")?16:0,0]},Object.assign({},SPR,{delay:d*.07})).then(function(){settle(el)});if(stop)stop()},{margin:"0px 0px -8% 0px"})};
+    var stop=M.inView(el,function(){M.animate(el,{opacity:[0,1],y:[36,0],rotateX:[el.matches(".pick,.fmt")?16:0,0],transformPerspective:900},Object.assign({},SPR,{delay:d*.07})).then(function(){settle(el)});if(stop)stop()},{margin:"0px 0px -8% 0px"})};
   POP=function(el){if(!el)return;M.animate(el,{scale:[1,.965,1.02,1]},{duration:.5,ease:[.22,.7,.2,1]}).then(function(){el.style.transform=""})};
   ENTER=function(el){M.animate(el,{opacity:[0,1],y:[24,0],scale:[.97,1]},SPR).then(function(){settle(el)})};
 }catch(e){document.documentElement.classList.remove("fm");FM=null}}

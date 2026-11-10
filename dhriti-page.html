@@ -1407,7 +1407,7 @@ document.addEventListener("DOMContentLoaded",function(){
   function tick(){
     cur+= (target-cur)*0.11;
     if(Math.abs(target-cur)<0.5){cur=target;}
-    mine=true; window.scrollTo(0,cur); 
+    mine=true; window.scrollTo({top:cur,behavior:"instant"}); 
     if(cur!==target){raf=requestAnimationFrame(tick);} else {raf=0; setTimeout(function(){mine=false;},50);}
   }
   window.addEventListener("wheel",function(e){
