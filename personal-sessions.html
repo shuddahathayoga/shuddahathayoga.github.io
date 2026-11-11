@@ -530,7 +530,7 @@ var nb=$("#navbtn"),menu=$("#menu");nb.addEventListener("click",function(){var o
 /* 3D lotus: the same hand-built canvas lotus as the Dhriti landing page.
    Three rings of curved, shaded petals, a seed pod, a lily pad, water ripples and rising prana sparks; it opens as you scroll */
 var PAL={petal:[[[214,96,112],[255,228,214]],[[204,86,104],[255,222,206]],[[184,74,96],[251,211,192]]],glow1:"251,211,192",glow2:"242,166,90",ripple:"rgba(182,204,196,0.16)",pad:["#0E4A3A","#1B6B52","rgba(120,180,150,0.35)"],spark:"255,226,180"};
-var PHONE=matchMedia("(pointer: coarse)").matches||innerWidth<760,DPR=Math.min(PHONE?1.5:2,window.devicePixelRatio||1);
+var PHONE=matchMedia("(pointer: coarse)").matches||innerWidth<760,DPR=Math.min(PHONE?1.15:2,window.devicePixelRatio||1);
 function clamp(x,a,b){return Math.max(a,Math.min(b,x))}function mix(a,b,t){return a+(b-a)*t}function ez(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
 function rotY(p,a){var c=Math.cos(a),s=Math.sin(a);return [p[0]*c+p[2]*s,p[1],-p[0]*s+p[2]*c]}
 function rotX(p,a){var c=Math.cos(a),s=Math.sin(a);return [p[0],p[1]*c-p[2]*s,p[1]*s+p[2]*c]}
@@ -541,7 +541,7 @@ function lsize(){var r=LC.getBoundingClientRect();LW=r.width;LH=r.height;LC.widt
 lsize();addEventListener("resize",lsize);if(window.ResizeObserver)new ResizeObserver(lsize).observe(LC);
 var lvis=true;if("IntersectionObserver" in window)new IntersectionObserver(function(e){lvis=e[0].isIntersecting}).observe(LC);
 var RINGS=[{n:8,len:.62,wid:.30,closed:.18,open:.62,cup:.20,off:0,c0:PAL.petal[0][0],c1:PAL.petal[0][1]},{n:10,len:.82,wid:.34,closed:.26,open:1.02,cup:.18,off:.31,c0:PAL.petal[1][0],c1:PAL.petal[1][1]},{n:12,len:.98,wid:.36,closed:.34,open:1.34,cup:.15,off:.13,c0:PAL.petal[2][0],c1:PAL.petal[2][1]}];
-var US=PHONE?8:10,VS=PHONE?5:6,LIGHT=nrm([-.4,.8,-.6]);
+var US=PHONE?6:10,VS=PHONE?4:6,LIGHT=nrm([-.4,.8,-.6]);
 function petalPoint(r,u,v,tilt){var w=r.wid*Math.pow(Math.sin(Math.PI*Math.min(u,.999)),.85)*(1-.35*u*u);var p=rotX([v*w,u*r.len,-r.cup*(1-v*v)*Math.sin(Math.PI*u)+.06*u*u],tilt);return [p[0],p[1],p[2]+.12]}
 var parts=[];for(var pi=0;pi<(PHONE?50:90);pi++)parts.push({x:Math.random()*2-1,y:Math.random(),z:Math.random()*2-1,s:.4+Math.random()*1.4,v:.02+Math.random()*.05,ph:Math.random()*6.28});
 var mx=0,my=0;
@@ -589,11 +589,13 @@ if(!reduce){
   var heroT=.35,howV=0,useMS=false;
   if(M&&M.scroll){try{M.scroll(function(p){heroT=.35+p*.65},{target:$(".hero"),offset:["start start","end start"]});M.scroll(function(p){howV=p},{target:how,offset:["start start","end end"]});useMS=true}catch(e){useMS=false}}
   var hvis=true;if("IntersectionObserver" in window)new IntersectionObserver(function(e){hvis=e[0].isIntersecting}).observe(how);
-  var fN=0,SKIP=PHONE?2:1,COST=0,lastT=0;
+  var fN=0,SKIP=PHONE?3:1,COST=0,lastT=0,lastScroll=-1e9;
+  /* phones: pause the decorative lotus while a finger is scrolling, resume the moment it stops */
+  addEventListener("scroll",function(){lastScroll=performance.now()},{passive:true});addEventListener("touchmove",function(){lastScroll=performance.now()},{passive:true});
   (function loop(ts){var dt=lastT?Math.min(50,ts-lastT):16.7;lastT=ts;clock=ts/1000;if(!useMS){heroT=Math.min(1,.35+scrollY/(innerHeight*.7)*.65);howV=howP()}
     heroP+=(heroT-heroP)*(1-Math.exp(-dt*.005));
     /* adaptive pacing: paint the lotus every 2nd or 3rd frame on slower devices so scrolling stays at full rate */
-    if(lvis&&(fN++%SKIP)===0){var t0=performance.now();lotus(heroP,clock);COST=COST*.85+(performance.now()-t0)*.15;SKIP=Math.max(PHONE?2:1,COST>11?3:COST>5.5?2:1)}
+    if(lvis&&!(PHONE&&ts-lastScroll<180)&&(fN++%SKIP)===0){var t0=performance.now();lotus(heroP,clock);COST=COST*.85+(performance.now()-t0)*.15;SKIP=Math.max(PHONE?3:1,COST>11?3:COST>5.5?2:1)}
     if(hvis)drumAt(howV);requestAnimationFrame(loop)})(0);
   /* smooth wheel scrolling for mouse and trackpad on desktop only; phones keep native scrolling */
   (function(){try{if(!matchMedia("(pointer: fine) and (hover: hover)").matches)return}catch(e){return}
