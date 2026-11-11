@@ -304,6 +304,33 @@ button.mb-cta{width:100%;border:0;background-color:transparent;cursor:pointer;fo
 .co-done .mb-cta{margin-top:1rem}
 @media (max-width:900px){.co-wrap{grid-template-columns:1fr}.co-pay{position:static}}
 
+.cs{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(320px,1fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:start}
+.cs h2{font-family:var(--display);font-weight:400;font-size:clamp(1.6rem,3.4vw,2.2rem);margin:.4rem 0 .8rem;color:var(--ink)}
+.cs-lead{color:var(--mid);line-height:1.7;max-width:56ch;margin:0 0 1.3rem}
+.cs-points{list-style:none;margin:0;padding:0;display:grid;gap:.7rem}
+.cs-points li{display:flex;gap:.6rem;align-items:flex-start;color:var(--mid);line-height:1.5}
+.cs-points svg{flex:none;margin-top:.2rem;color:var(--gold)}
+.cs-h{font-family:var(--text);font-weight:500;font-size:.95rem;color:var(--ink);margin:0 0 .6rem}
+.cs-h span{color:var(--soft);font-weight:400}
+.cs-days,.cs-times{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.1rem}
+.cs-days{flex-wrap:nowrap;overflow-x:auto;padding-bottom:.3rem;scrollbar-width:thin}
+.cs-chip{flex:none;min-height:44px;min-width:64px;padding:.45rem .75rem;border:0;border-radius:12px;background:rgba(255,246,239,.06);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink);font:inherit;font-size:.9rem;cursor:pointer;line-height:1.2;text-align:center}
+.cs-chip small{display:block;color:var(--soft);font-size:.75rem}
+.cs-chip:hover{box-shadow:inset 0 0 0 1px rgba(242,166,90,.5)}
+.cs-chip[aria-checked="true"]{background:linear-gradient(180deg,#F6B472,#E8924A);color:#1D0E03;box-shadow:none}
+.cs-chip[aria-checked="true"] small{color:#3a2210}
+.cs-chip:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.cs-load,.cs-hint{margin:0;color:var(--soft);font-size:.9rem}
+.cs-fields{margin-top:.4rem}
+.cs-card textarea{width:100%;box-sizing:border-box;min-height:72px;padding:.7rem .9rem;border-radius:12px;border:0;background:rgba(255,246,239,.06);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink);font:inherit;font-size:16px;resize:vertical}
+.cs-card label em{font-style:normal;color:var(--soft);font-size:.82rem}
+.cs-btn{margin-top:.4rem}
+.cs-done{text-align:center;padding:1rem 0}
+.cs-done h3{font-family:var(--display);font-weight:400;font-size:1.6rem;color:var(--ink);margin:.4rem 0}
+.cs-done p{color:var(--mid);line-height:1.6}
+.cs-when{color:var(--gold)!important;font-size:1.05rem}
+@media (max-width:900px){.cs{grid-template-columns:1fr}}
+
 </style>
 
 <header class="top">
@@ -540,6 +567,44 @@ button.mb-cta{width:100%;border:0;background-color:transparent;cursor:pointer;fo
       <a class="mb-wa" href="https://wa.me/919391020729?text=Hi%2C%20I%27d%20like%20to%20join%20the%20Samarpana%20membership." target="_blank" rel="noopener">Questions first? Ask us on WhatsApp</a>
     </article></div>
     <p class="mb-start">New to the practice? <a href="https://www.shuddahathayoga.com/" target="_top">Begin with the 21-day Dhriti program</a>. Every participant is invited to membership at the closing session.</p>
+  </div>
+
+  <div class="in sec cs" id="consult">
+    <div class="cs-info">
+      <p class="label">Free consultation</p>
+      <h2>Not sure which step is right for you?</h2>
+      <p class="cs-lead">Book a free 40-minute Zoom call with the Shudda Hathayoga team. Tell us about your routine, your health and what you hope for from the practice, and we will help you choose the membership that fits.</p>
+      <ul class="cs-points">
+        <li><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Included"><path d="M3.5 8.5l3 3 6-7"/></svg><span>40 minutes on Zoom with our team · your Zoom link arrives by email instantly</span></li>
+        <li><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Included"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Understand what each membership includes and how batches work</span></li>
+        <li><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Included"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Get your questions answered before you pay anything</span></li>
+        <li><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Included"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Monday to Saturday, 10 AM to 7 PM IST · completely free</span></li>
+      </ul>
+    </div>
+    <div class="co-card cs-card">
+      <form class="cs-form" novalidate>
+        <h3 class="cs-h">Choose a day</h3>
+        <div class="cs-days" role="radiogroup" aria-label="Day"><p class="cs-load">Loading available times…</p></div>
+        <h3 class="cs-h">Choose a time <span>(IST)</span></h3>
+        <div class="cs-times" role="radiogroup" aria-label="Time"><p class="cs-hint">Pick a day first.</p></div>
+        <small class="mj-err cs-slot-err" aria-live="polite"></small>
+        <div class="cs-fields">
+          <div class="mj-f"><label for="cs-n">Full name</label><input id="cs-n" name="name" autocomplete="name" required><small class="mj-err" aria-live="polite"></small></div>
+          <div class="mj-f"><label for="cs-p">WhatsApp number</label><div class="co-tel"><span>+91</span><input id="cs-p" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="10-digit mobile" required></div><small class="mj-err" aria-live="polite"></small></div>
+          <div class="mj-f"><label for="cs-e">Email <em>(for the calendar invite)</em></label><input id="cs-e" name="email" type="email" autocomplete="email" required><small class="mj-err" aria-live="polite"></small></div>
+          <div class="mj-f"><label for="cs-pl">Interested in</label><select id="cs-pl" name="plan"><option>Not sure yet</option><option>Prarambha · Online</option><option>Sadhana · In-person</option><option>Samarpana · Annual</option></select></div>
+          <div class="mj-f"><label for="cs-m">Anything you want to discuss? <em>Optional</em></label><textarea id="cs-m" name="message" rows="2"></textarea></div>
+        </div>
+        <button class="mb-cta solid cs-btn" type="submit"><span>Book my free call</span></button>
+        <p class="mj-fail" role="alert" hidden></p>
+      </form>
+      <div class="cs-done" hidden tabindex="-1">
+        <span class="mj-tick" aria-hidden="true">✓</span>
+        <h3>Your call is booked</h3>
+        <p class="cs-when"></p>
+        <p class="cs-msg">Your Zoom link and a calendar invite have been sent to your email.</p><p class="cs-zoom" hidden><a class="mb-cta ghost t1" target="_blank" rel="noopener" href="#">Open Zoom link</a></p>
+      </div>
+    </div>
   </div>
   <div class="in sec mb-compare">
     <div><p class="label">Compare</p><h2>What each step includes</h2></div>
@@ -799,6 +864,37 @@ button.mb-cta{width:100%;border:0;background-color:transparent;cursor:pointer;fo
         rz.open()
       }).catch(function(x){err(x&&x.error==="bad_coupon"?"That coupon is no longer valid. Remove it and try again.":x&&x.error==="missing_details"?"Please fill in your name, number and email.":"We could not open the checkout just now. Please try again in a minute.")})});
   });
+})();
+
+(function(){
+  var API="https://www.shuddahathayoga.com/_functions/";
+  var box=document.getElementById("consult");if(!box)return;
+  var form=box.querySelector(".cs-form"),daysEl=box.querySelector(".cs-days"),timesEl=box.querySelector(".cs-times"),slotErr=box.querySelector(".cs-slot-err"),btn=box.querySelector(".cs-btn"),fail=box.querySelector(".mj-fail");
+  var DAYS={},day="",time="",loaded=false;
+  function post(p,b){return fetch(API+p,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)}).then(function(r){return r.json().then(function(j){if(!r.ok)throw j;return j})})}
+  function dlabel(d){var t=new Date(d+"T12:00:00+05:30");return {w:t.toLocaleDateString("en-IN",{weekday:"short",timeZone:"Asia/Kolkata"}),d:t.toLocaleDateString("en-IN",{day:"numeric",month:"short",timeZone:"Asia/Kolkata"})}}
+  function tlabel(hm){var h=+hm.slice(0,2),m=hm.slice(3);return ((h+11)%12+1)+":"+m+(h<12?" AM":" PM")}
+  function chip(txt,sub,on,val){var b=document.createElement("button");b.type="button";b.className="cs-chip";b.setAttribute("role","radio");b.setAttribute("aria-checked",on?"true":"false");b.dataset.v=val;b.innerHTML=txt+(sub?"<small>"+sub+"</small>":"");return b}
+  function renderTimes(){timesEl.innerHTML="";if(!day){timesEl.innerHTML='<p class="cs-hint">Pick a day first.</p>';return}
+    (DAYS[day]||[]).forEach(function(hm){var b=chip(tlabel(hm),"",hm===time,hm);b.addEventListener("click",function(){time=hm;slotErr.textContent="";renderTimes()});timesEl.appendChild(b)})}
+  function renderDays(){daysEl.innerHTML="";var ks=Object.keys(DAYS).sort();
+    if(!ks.length){daysEl.innerHTML='<p class="cs-load">No free times in the next two weeks. Message us on <a href="https://wa.me/919391020729" target="_blank" rel="noopener" style="color:var(--gold)">WhatsApp</a> and we will find a time.</p>';return}
+    ks.forEach(function(k){var l=dlabel(k),b=chip(l.w,l.d,k===day,k);b.addEventListener("click",function(){day=k;time="";slotErr.textContent="";renderDays();renderTimes()});daysEl.appendChild(b)})}
+  function load(){if(loaded)return;loaded=true;post("consultSlots",{}).then(function(r){DAYS=r.days||{};renderDays();renderTimes()}).catch(function(){loaded=false;daysEl.innerHTML='<p class="cs-load">We could not load the times just now. Refresh the page, or message us on WhatsApp.</p>'})}
+  if("IntersectionObserver" in window){var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){load();io.disconnect()}},{rootMargin:"400px"});io.observe(box)}else load();
+  addEventListener("hashchange",function(){if(location.hash==="#membership")load()});
+  var rules={name:function(v){return v.trim().length>1?"":"Enter your full name."},phone:function(v){return v.replace(/\D/g,"").length>=10?"":"Enter a 10-digit mobile number."},email:function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())?"":"Enter an email like name@example.com."}};
+  function check(n){var el=form.elements[n],m=rules[n](el.value),f=el.closest(".mj-f");f.classList.toggle("bad",!!m);f.querySelector(".mj-err").textContent=m;el.setAttribute("aria-invalid",m?"true":"false");return !m}
+  Object.keys(rules).forEach(function(n){var el=form.elements[n];el.addEventListener("blur",function(){if(el.value)check(n)});el.addEventListener("input",function(){var f=el.closest(".mj-f");if(f.classList.contains("bad")){f.classList.remove("bad");f.querySelector(".mj-err").textContent=""}})});
+  form.addEventListener("submit",function(e){e.preventDefault();fail.hidden=true;
+    var ok=["name","phone","email"].map(check).every(Boolean);if(!day||!time){slotErr.textContent="Choose a day and a time for your call.";ok=false}
+    if(!ok){var f=form.querySelector(".bad input");if(f)f.focus();return}
+    var E=form.elements,slot=day.slice(2,4)+day.slice(5,7)+day.slice(8,10)+time.replace(":","");
+    btn.disabled=true;btn.textContent="Booking your call…";
+    post("consultBook",{slot:slot,name:E.name.value.trim(),phone:E.phone.value.trim(),email:E.email.value.trim(),plan:E.plan.value,message:E.message.value.trim()}).then(function(r){
+      form.hidden=true;var d=box.querySelector(".cs-done");d.querySelector(".cs-when").textContent=r.time+" · 40 minutes on Zoom";if(r.zoom){var z=d.querySelector(".cs-zoom");z.querySelector("a").href=r.zoom;z.hidden=false}else d.querySelector(".cs-msg").textContent="A calendar invite is on its way to your email. We will send the Zoom link on WhatsApp before the call.";d.hidden=false;d.focus()
+    }).catch(function(x){btn.disabled=false;btn.innerHTML="<span>Book my free call</span>";
+      if(x&&x.error==="slot_taken"){fail.textContent="Someone just booked that time. Please pick another.";loaded=false;load()}else fail.textContent="We could not book the call just now. Please try again, or message us on WhatsApp.";fail.hidden=false})});
 })();
 </script>
 
