@@ -215,6 +215,33 @@ footer .legal a:hover{color:var(--ink,#FFF6EF)}
 .mb-endorse p{margin:0;color:var(--soft);font-size:.85rem;letter-spacing:.02em}
 @media (min-width:900px){.mb-faq{grid-template-columns:minmax(0,1fr) minmax(0,2fr);align-items:start}}
 @media (max-width:980px){.mb-cards{grid-template-columns:1fr;max-width:560px;margin-inline:auto}.mb-path{display:none}.mb-steps{grid-template-columns:1fr}}
+
+button.mb-cta{width:100%;border:0;background-color:transparent;cursor:pointer;font:inherit;font-size:.98rem}
+.mb-wa{display:block;text-align:center;margin-top:.75rem;color:var(--soft);font-size:.86rem;text-decoration:underline;text-underline-offset:3px;min-height:24px}
+.mb-wa:hover{color:var(--ink)}
+.mj{position:fixed;inset:0;z-index:2147483000;display:flex;justify-content:flex-end}
+.mj[hidden]{display:none}
+.mj-scrim{position:absolute;inset:0;background:rgba(2,16,13,.72);opacity:0;transition:opacity .25s}
+.mj-panel{position:relative;width:min(460px,100%);height:100%;overflow-y:auto;overscroll-behavior:contain;background:#04211C;box-shadow:-1px 0 0 rgba(242,166,90,.25),-30px 0 60px -20px rgba(0,0,0,.7);padding:2.6rem 1.8rem 2rem;transform:translateX(100%);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.mj.open .mj-scrim{opacity:1}.mj.open .mj-panel{transform:none}
+.mj-x{position:absolute;top:.8rem;right:.8rem;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,246,239,.06);color:var(--ink);font-size:1.5rem;cursor:pointer}
+.mj-x:focus-visible,.mj input:focus-visible,.mj textarea:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.mj h2{font-family:var(--display);font-weight:400;font-size:1.9rem;margin:.4rem 0 .4rem;color:var(--ink)}
+.mj h2 span{color:var(--gold)}
+.mj-amt{margin:0 0 1.4rem;color:var(--soft)}.mj-amt b{font-family:var(--display);font-weight:400;font-size:1.6rem;color:var(--ink)}
+.mj-f{display:grid;gap:.35rem;margin-bottom:.95rem}
+.mj-f label{color:var(--mid);font-size:.92rem}.mj-f label em{font-style:normal;color:var(--soft);font-size:.82rem}
+.mj input,.mj textarea{width:100%;box-sizing:border-box;min-height:48px;padding:.7rem .9rem;border-radius:12px;border:0;background:rgba(255,246,239,.06);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink);font:inherit;font-size:16px}
+.mj textarea{min-height:72px;resize:vertical}
+.mj .bad input{box-shadow:inset 0 0 0 1px #F3A08C}
+.mj-err{color:#F3A08C;font-size:.84rem;min-height:0}
+.mj-pay{margin-top:.6rem}.mj-pay[disabled]{opacity:.65;cursor:progress}
+.mj-note{color:var(--soft);font-size:.82rem;text-align:center;margin:.8rem 0 0}
+.mj-fail{color:#F3A08C;font-size:.9rem;margin:.8rem 0 0;line-height:1.5}.mj-fail a{color:var(--gold)}
+.mj-done{text-align:center;padding-top:2rem;outline:0}
+.mj-tick{display:grid;place-items:center;width:72px;height:72px;margin:0 auto 1rem;border-radius:50%;background:rgba(111,195,178,.16);color:#6FC3B2;font-size:2rem}
+.mj-done p{color:var(--mid);line-height:1.65}.mj-ref{font-size:.9rem}.mj-ref b{color:var(--ink);font-weight:500}
+@media (prefers-reduced-motion:reduce){.mj-scrim,.mj-panel{transition:none}}
 @media (prefers-reduced-motion:reduce){.mb-card,.mb-cta,.mb-cta svg,.mb-q summary i{transition:none}.mb-card:hover{transform:none}}
 
 </style>
@@ -429,7 +456,8 @@ footer .legal a:hover{color:var(--ink,#FFF6EF)}
       <p class="mb-desc">Keep your practice alive after your first program. Join live online sessions every week with a closed group, and stay connected to a community of practitioners.</p>
       <p class="mb-price"><b>₹4,999</b> <span>per year</span></p>
       <ul class="mb-feats"><li><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Included"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Weekly live online sessions on Zoom, for members only</span></li><li><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Included"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Weekly guided meditation</span></li><li><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Included"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Monthly live introduction session</span></li><li><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Included"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Members-only WhatsApp group for schedules</span></li><li><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Included"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Member price and first booking on every workshop</span></li></ul>
-      <a class="mb-cta ghost t1" href="https://wa.me/919391020729?text=Hi%2C%20I%27d%20like%20to%20join%20the%20Prarambha%20membership." target="_blank" rel="noopener">Join Prarambha <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      <button class="mb-cta ghost t1" type="button" data-tier="prarambha" data-name="Prarambha" data-plan="Online membership · ₹4,999 per year" data-amt="4,999">Join Prarambha <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+      <a class="mb-wa" href="https://wa.me/919391020729?text=Hi%2C%20I%27d%20like%20to%20join%20the%20Prarambha%20membership." target="_blank" rel="noopener">Questions first? Ask us on WhatsApp</a>
     </article><article class="mb-card t2">
       <span class="mb-num">02</span><span class="mb-flag">Most chosen</span>
       <span class="mb-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1 3.5 5 5.5 5 10a5 5 0 0 1-10 0c0-2.6 1.4-4.2 2.6-5.4.3 1.8 1.2 2.9 2.4 3.4C11.5 8.5 11 6 12 3z"/></svg></span>
@@ -438,7 +466,8 @@ footer .legal a:hover{color:var(--ink,#FFF6EF)}
       <p class="mb-desc">Learn and settle into a complete daily practice in person, in a small batch, with a teacher who corrects you as you go.</p>
       <p class="mb-price"><b>₹18,000</b> <span>per cycle</span></p>
       <ul class="mb-feats"><li><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Included"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Everything in Prarambha</span></li><li><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Included"><path d="M3.5 8.5l3 3 6-7"/></svg><span>48 or 60 guided in-person sessions in Bangalore</span></li><li><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Included"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Small batches of up to 20</span></li><li><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Included"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Catch-up session if you miss a new practice</span></li><li><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Included"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Closing session with sharings</span></li></ul>
-      <a class="mb-cta solid" href="https://wa.me/919391020729?text=Hi%2C%20I%27d%20like%20to%20join%20the%20Sadhana%20membership." target="_blank" rel="noopener">Join Sadhana <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      <button class="mb-cta solid" type="button" data-tier="sadhana" data-name="Sadhana" data-plan="In-person membership · ₹18,000 per cycle" data-amt="18,000">Join Sadhana <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+      <a class="mb-wa" href="https://wa.me/919391020729?text=Hi%2C%20I%27d%20like%20to%20join%20the%20Sadhana%20membership." target="_blank" rel="noopener">Questions first? Ask us on WhatsApp</a>
     </article><article class="mb-card t3">
       <span class="mb-num">03</span>
       <span class="mb-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></span>
@@ -447,7 +476,8 @@ footer .legal a:hover{color:var(--ink,#FFF6EF)}
       <p class="mb-desc">A full year of guided sadhana: every workshop we offer, personal attention, and regular days set aside only for practice.</p>
       <p class="mb-price"><b>₹50,000</b> <span>per year</span></p>
       <ul class="mb-feats"><li><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Included"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Everything in Sadhana</span></li><li><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Included"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Every foundation workshop through the year</span></li><li><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Included"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Practice reviews and individual corrections</span></li><li><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Included"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Personal one-to-one sessions every quarter</span></li><li><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Included"><path d="M3.5 8.5l3 3 6-7"/></svg><span>A half-day sadhana retreat each quarter</span></li></ul>
-      <a class="mb-cta ghost t3" href="https://wa.me/919391020729?text=Hi%2C%20I%27d%20like%20to%20join%20the%20Samarpana%20membership." target="_blank" rel="noopener">Join Samarpana <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      <button class="mb-cta ghost t3" type="button" data-tier="samarpana" data-name="Samarpana" data-plan="Annual membership · ₹50,000 per year" data-amt="50,000">Join Samarpana <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+      <a class="mb-wa" href="https://wa.me/919391020729?text=Hi%2C%20I%27d%20like%20to%20join%20the%20Samarpana%20membership." target="_blank" rel="noopener">Questions first? Ask us on WhatsApp</a>
     </article></div>
     <p class="mb-start">New to the practice? <a href="https://www.shuddahathayoga.com/" target="_top">Begin with the 21-day Dhriti program</a>. Every participant is invited to membership at the closing session.</p>
   </div>
@@ -459,11 +489,11 @@ footer .legal a:hover{color:var(--ink,#FFF6EF)}
     </table></div>
   </div>
   <div class="in sec mb-how">
-    <div><p class="label">How it works</p><h2>Joining takes three messages</h2></div>
+    <div><p class="label">How it works</p><h2>Joining takes two minutes</h2></div>
     <ol class="mb-steps">
       <li><b>Choose your step</b><span>Pick the membership that fits your life right now. You can move up later.</span></li>
-      <li><b>Message us on WhatsApp</b><span>We confirm your batch, timings and venue, and send you a secure payment link.</span></li>
-      <li><b>Begin your practice</b><span>You are added to the members' group and receive your first session details.</span></li>
+      <li><b>Pay securely online</b><span>Enter your details and pay with UPI, card or net banking through Razorpay. You get a receipt straight away.</span></li>
+      <li><b>Begin your practice</b><span>We call you within a day to confirm your batch, timings and venue, and add you to the members' group.</span></li>
     </ol>
   </div>
   <div class="in sec mb-faq">
@@ -471,8 +501,81 @@ footer .legal a:hover{color:var(--ink,#FFF6EF)}
     <div><details class="mb-q"><summary>Do I need to know yoga to join?<i aria-hidden="true">+</i></summary><p>No. Most members begin with our 21-day Dhriti program, and every Dhriti participant is invited to membership at the closing session. You can also join Prarambha directly.</p></details><details class="mb-q"><summary>Where do the in-person sessions happen?<i aria-hidden="true">+</i></summary><p>Sadhana and Samarpana sessions are held in person in Bangalore. Write to us on WhatsApp for the current venue and batch timings.</p></details><details class="mb-q"><summary>Can I move up a step later?<i aria-hidden="true">+</i></summary><p>Yes. You can move from Prarambha to Sadhana, or from Sadhana to Samarpana, at any time. We adjust what you have already paid.</p></details><details class="mb-q"><summary>What if I miss sessions?<i aria-hidden="true">+</i></summary><p>Regular sessions are flexible. Sessions where a new practice is taught are important, so we give you a catch-up session if you miss one.</p></details><details class="mb-q"><summary>What is the refund policy?<i aria-hidden="true">+</i></summary><p>You can ask for a cancellation or refund within 7 days of paying. Approved refunds are paid back within 7 days. See our refund policy for details.</p></details></div>
   </div>
   <div class="in mb-endorse"><p>Practices Structured by Sadhguru · Classes by Classical Hatha Yoga Teachers, certified by Sadhguru Gurukulam</p></div>
+  <div class="mj" id="mj" hidden>
+    <div class="mj-scrim" data-close></div>
+    <div class="mj-panel" role="dialog" aria-modal="true" aria-labelledby="mj-title">
+      <button class="mj-x" type="button" data-close aria-label="Close">×</button>
+      <div class="mj-form-wrap" id="mj-step1">
+        <p class="label" id="mj-kind">Membership</p>
+        <h2 id="mj-title">Join <span id="mj-name">Prarambha</span></h2>
+        <p class="mj-amt">₹<b id="mj-amt">4,999</b> <span id="mj-per"></span></p>
+        <form id="mj-form" novalidate>
+          <div class="mj-f"><label for="mj-n">Full name</label><input id="mj-n" name="name" autocomplete="name" required><small class="mj-err" aria-live="polite"></small></div>
+          <div class="mj-f"><label for="mj-p">WhatsApp number</label><input id="mj-p" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="10-digit mobile" required><small class="mj-err" aria-live="polite"></small></div>
+          <div class="mj-f"><label for="mj-e">Email</label><input id="mj-e" name="email" type="email" autocomplete="email" required><small class="mj-err" aria-live="polite"></small></div>
+          <div class="mj-f"><label for="mj-c">City</label><input id="mj-c" name="city" autocomplete="address-level2"></div>
+          <div class="mj-f"><label for="mj-m">Anything we should know? <em>Optional</em></label><textarea id="mj-m" name="message" rows="2"></textarea></div>
+          <button class="mb-cta solid mj-pay" id="mj-pay" type="submit"><span>Pay ₹<span id="mj-amt2">4,999</span> securely</span></button>
+          <p class="mj-note">Secure payment by Razorpay · UPI, cards, net banking · 7-day refund window</p>
+          <p class="mj-fail" id="mj-fail" role="alert" hidden></p>
+        </form>
+      </div>
+      <div class="mj-done" id="mj-done" hidden tabindex="-1">
+        <span class="mj-tick" aria-hidden="true">✓</span>
+        <h2>Welcome to <span id="mj-dname"></span></h2>
+        <p>Your payment is confirmed. We will call you on WhatsApp within a day to confirm your batch and add you to the members' group.</p>
+        <p class="mj-ref">Payment reference <b id="mj-ref"></b></p>
+        <button class="mb-cta ghost t1" type="button" data-close>Close</button>
+      </div>
+    </div>
+  </div>
 </section>
 </main>
+<script>
+(function(){
+  var API="https://www.shuddahathayoga.com/_functions/";
+  var MODE=/[?&]checkout=test\b/.test(location.search)?"test":"live";
+  var mj=document.getElementById("mj");if(!mj)return;document.body.appendChild(mj);
+  var form=document.getElementById("mj-form"),pay=document.getElementById("mj-pay"),fail=document.getElementById("mj-fail");
+  var cur=null,opener=null,WA="https://wa.me/919391020729?text=";
+  function $(i){return document.getElementById(i)}
+  function open(b){cur={tier:b.dataset.tier,name:b.dataset.name,plan:b.dataset.plan,amt:b.dataset.amt};opener=b;
+    $("mj-name").textContent=cur.name;$("mj-amt").textContent=cur.amt;$("mj-amt2").textContent=cur.amt;$("mj-kind").textContent=cur.plan.split(" · ")[0];
+    $("mj-per").textContent=cur.plan.split(" ").slice(-2).join(" ");$("mj-step1").hidden=false;$("mj-done").hidden=true;fail.hidden=true;
+    mj.hidden=false;document.documentElement.style.overflow="hidden";requestAnimationFrame(function(){mj.classList.add("open");$("mj-n").focus()})}
+  function close(){mj.classList.remove("open");document.documentElement.style.overflow="";setTimeout(function(){mj.hidden=true;if(opener)opener.focus()},matchMedia("(prefers-reduced-motion:reduce)").matches?0:300)}
+  document.querySelectorAll("button[data-tier]").forEach(function(b){b.addEventListener("click",function(){open(b)})});
+  mj.addEventListener("click",function(e){if(e.target.closest("[data-close]"))close()});
+  document.addEventListener("keydown",function(e){if(mj.hidden)return;if(e.key==="Escape")close();
+    if(e.key==="Tab"){var f=[].filter.call(mj.querySelectorAll("button,input,textarea,a[href]"),function(x){return x.offsetParent!==null&&!x.disabled});if(!f.length)return;
+      var a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}});
+  var rules={"mj-n":function(v){return v.trim().length>1?"":"Enter your full name."},
+    "mj-p":function(v){return v.replace(/\D/g,"").length>=10?"":"Enter a 10-digit mobile number."},
+    "mj-e":function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())?"":"Enter an email like name@example.com."}};
+  function check(id){var el=$(id),m=rules[id](el.value),box=el.parentElement;box.classList.toggle("bad",!!m);box.querySelector(".mj-err").textContent=m;el.setAttribute("aria-invalid",m?"true":"false");return !m}
+  Object.keys(rules).forEach(function(id){var el=$(id);el.addEventListener("blur",function(){if(el.value)check(id)});
+    el.addEventListener("input",function(){var box=el.parentElement;if(box.classList.contains("bad")){box.classList.remove("bad");box.querySelector(".mj-err").textContent=""}})});
+  function post(p,b){return fetch(API+p,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)}).then(function(r){return r.json().then(function(j){if(!r.ok)throw j;return j})})}
+  function loadRzp(){return new Promise(function(res,rej){if(window.Razorpay)return res();var s=document.createElement("script");s.src="https://checkout.razorpay.com/v1/checkout.js";s.onload=res;s.onerror=function(){rej({error:"script"})};document.head.appendChild(s)})}
+  function busy(on,t){pay.disabled=on;if(on)pay.textContent=t||"Opening secure checkout…";else pay.innerHTML='<span>Pay ₹<span id="mj-amt2">'+cur.amt+'</span> securely</span>'}
+  function err(msg){busy(false);fail.innerHTML=msg+' You can also <a href="'+WA+encodeURIComponent("Hi, I'd like to join the "+cur.name+" membership.")+'" target="_blank" rel="noopener">message us on WhatsApp</a>.';fail.hidden=false}
+  form.addEventListener("submit",function(e){e.preventDefault();fail.hidden=true;
+    var okAll=["mj-n","mj-p","mj-e"].map(check).every(Boolean);if(!okAll){var f=mj.querySelector(".bad input");if(f)f.focus();return}
+    var d={tier:cur.tier,mode:MODE,name:$("mj-n").value.trim(),phone:$("mj-p").value.trim(),email:$("mj-e").value.trim(),city:$("mj-c").value.trim(),message:$("mj-m").value.trim()};
+    busy(true);
+    Promise.all([post("membershipOrder",d),loadRzp()]).then(function(r){var o=r[0];
+      var rz=new Razorpay({key:o.keyId,order_id:o.orderId,amount:o.amount,currency:o.currency||"INR",name:"Shudda Hathayoga",description:(o.plan||cur.name+" membership").slice(0,80),
+        prefill:{name:d.name,email:d.email,contact:d.phone},notes:{tier:d.tier},theme:{color:"#014B3F",backdrop_color:"#04211C"},
+        modal:{ondismiss:function(){busy(false)},confirm_close:true},
+        handler:function(resp){busy(true,"Confirming your payment…");post("membershipVerify",Object.assign({mode:MODE},resp)).then(function(v){
+          if(!v.verified)return err("We could not confirm this payment. If money was taken, it is safe: share reference "+resp.razorpay_payment_id+" with us.");
+          busy(false);$("mj-dname").textContent=cur.name;$("mj-ref").textContent=resp.razorpay_payment_id+(o.test?" (test)":"");$("mj-step1").hidden=true;$("mj-done").hidden=false;$("mj-done").focus()
+        }).catch(function(){err("Your payment went through but we could not confirm it just now. Please share reference "+resp.razorpay_payment_id+" with us.")})}});
+      rz.on("payment.failed",function(r){err("The payment did not go through"+(r&&r.error&&r.error.description?" ("+r.error.description+")":"")+". No money was taken. Try again or use another method.")});
+      rz.open()
+    }).catch(function(x){err(x&&x.error==="missing_details"?"Please fill in your name, number and email.":"We could not open the checkout just now. Please try again in a minute.")})});
+})();
+</script>
 
 <footer><div class="in"><span>Shudda Hathayoga · Classical Hatha Yoga, Practices Structured by Sadhguru · Since 2017</span><span class="legal"><a href="https://www.shuddahathayoga.com/programs" target="_top">Membership</a> · <a href="https://www.shuddahathayoga.com/personal-classes" target="_top">Personal classes</a><br><a href="https://www.shuddahathayoga.com/refunds" target="_top">Refund policy</a> · <a href="https://www.shuddahathayoga.com/return-policy" target="_top">Returns</a> · <a href="https://www.shuddahathayoga.com/copy-of-return-policy" target="_top">Shipping</a> · <a href="https://www.shuddahathayoga.com/privacypolicy" target="_top">Privacy</a> · <a href="https://www.shuddahathayoga.com/terms" target="_top">Terms</a></span></div></footer>
 
