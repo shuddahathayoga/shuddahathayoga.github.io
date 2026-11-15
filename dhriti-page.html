@@ -3332,7 +3332,7 @@ document.addEventListener("DOMContentLoaded",function(){
   }
   /* desktop UPI: a real Razorpay QR shown inside the form; the page checks every few seconds */
   var QR_URL = ORDER_URL.replace("razorpayOrder", "razorpayQr"), QRS_URL = ORDER_URL.replace("razorpayOrder", "razorpayQrStatus");
-  var qr = null, qrPoll = null, qrBusy = false;
+  var qr = null, qrPoll = null, qrBusy = false; function trackUp(id){ if (PAYMODE !== "live") return; try { if (window.parent !== window) window.parent.postMessage({ type: "dhriti-track", id: id || "", amount: 99900 }, "*"); } catch (e) {} }
   function makeQr(person) {
     clearInterval(qrPoll); qr = null;
     var img = document.getElementById("qrImg"); img.hidden = true;
@@ -3354,13 +3354,13 @@ document.addEventListener("DOMContentLoaded",function(){
       .then(function (r) { return r.json(); })
       .then(function (s) {
         qrBusy = false;
-        if (s && s.paid) { clearInterval(qrPoll); clearInterval(qrTimer); payEl.hidden = true; showDone("paid", s.paymentId, PAYMODE === "test" ? "Test Mode payment: no real money moved." : ""); return; }
+        if (s && s.paid) { clearInterval(qrPoll); clearInterval(qrTimer); payEl.hidden = true; trackUp(s.paymentId); showDone("paid", s.paymentId, PAYMODE === "test" ? "Test Mode payment: no real money moved." : ""); return; }
         if (manual) { var e = document.getElementById("payDemo"); e.hidden = false; e.textContent = "We haven't received the payment yet. Scan the code and approve ₹999 in your UPI app; this page updates by itself."; }
       })
       .catch(function () { qrBusy = false; });
   }
   function payDone(r) {
-    payEl.hidden = true; showDone("paid", r && r.razorpay_payment_id, PAYMODE === "test" ? "Test Mode payment: no real money moved." : "");
+    payEl.hidden = true; trackUp(r && r.razorpay_payment_id); showDone("paid", r && r.razorpay_payment_id, PAYMODE === "test" ? "Test Mode payment: no real money moved." : "");
     var v = Object.assign({}, r, { mode: PAYMODE === "test" ? "test" : "live" });
     fetch(VERIFY_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(v) }).catch(function () {});
   }
