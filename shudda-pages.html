@@ -186,7 +186,7 @@ footer .legal a:hover{color:var(--ink,#FFF6EF)}
 .mb-cta.solid:hover{transform:translateY(-1px)}
 .mb-cta svg{transition:transform .25s}.mb-cta:hover svg{transform:translateX(3px)}
 .mb-cta:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-.mb-start{text-align:center;color:var(--soft);margin:2rem auto 0;max-width:62ch}.mb-callnudge{margin-top:.75rem}
+.mb-start{text-align:center;color:var(--soft);margin:2rem auto 0;max-width:62ch}.mb-callnudge{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.85rem;margin:2.5rem auto 0;padding:1.75rem 1.25rem;max-width:560px;border-radius:18px;background:rgba(246,180,114,.06);box-shadow:inset 0 0 0 1px rgba(246,180,114,.28)}.mb-cn-q{margin:0;font-size:clamp(1.2rem,1rem + 1vw,1.5rem);line-height:1.3;color:#F3EDE2}.mb-cn-btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:52px;padding:.8rem 1.8rem;border-radius:999px;font-size:1.08rem;font-weight:500;text-decoration:none;color:#1D0E03;background:linear-gradient(180deg,#F6B472,#E8924A);transition:transform .2s}.mb-cn-btn:hover{transform:translateY(-1px)}.mb-cn-btn:focus-visible{outline:2px solid #F6B472;outline-offset:3px}.mb-cn-sub{margin:0;font-size:.92rem;color:var(--soft)}@media (max-width:480px){.mb-cn-btn{width:100%}}
 .mb-start a{color:var(--gold)}
 .mb-compare h2,.mb-how h2,.mb-faq h2{font-family:var(--display);font-weight:400;font-size:clamp(1.6rem,3.4vw,2.2rem);margin:.4rem 0 0}
 .mb-table-wrap{overflow-x:auto;border-radius:18px;box-shadow:inset 0 0 0 1px var(--line)}
@@ -582,7 +582,7 @@ html,body{overflow-x:clip;max-width:100%}
       <a class="mb-wa" href="https://wa.me/919391020729?text=Hi%2C%20I%27d%20like%20to%20join%20the%20Samarpana%20membership." target="_blank" rel="noopener">Questions first? Ask us on WhatsApp</a>
     </article></div>
     <p class="mb-start">New to the practice? <a href="https://www.shuddahathayoga.com/" target="_top">Begin with the 21-day Dhriti program</a>. Every participant is invited to membership at the closing session.</p>
-    <p class="mb-start mb-callnudge">Not sure which plan fits? <a href="#consult" onclick="var c=document.getElementById('consult');if(c){c.scrollIntoView({behavior:'smooth',block:'start'});}return false;">Book a free 40-minute call ↓</a></p>
+    <div class="mb-callnudge"><p class="mb-cn-q">Not sure which plan fits you?</p><a class="mb-cn-btn" href="#consult" onclick="var c=document.getElementById('consult');if(c){c.scrollIntoView({behavior:'smooth',block:'start'});}return false;">Book a free 40-minute call <span aria-hidden="true">↓</span></a><p class="mb-cn-sub">On Zoom with our team · Mon–Sat, 10 AM–7 PM IST</p></div>
   </div>
 
   <div class="in sec mb-compare">
