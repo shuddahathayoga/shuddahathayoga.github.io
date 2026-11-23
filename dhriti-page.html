@@ -1667,14 +1667,14 @@ document.addEventListener("DOMContentLoaded",function(){
       </details>
       <section class="sec">
         <h3 class="sec__h"><span>1</span>Choose your batch</h3>
-        <p class="f" id="lb-batch">Which timings are you comfortable with? <span class="req">*</span></p>
-        <div class="bts" id="f-batch" role="group" aria-labelledby="lb-batch">
-          <label class="bt"><input type="checkbox" name="entry.167813074" value="Dhriti Online Program |  3.30 am - 5.00 am | IST"><span><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8 8 0 1 0 5 13.6A7 7 0 0 1 15.5 3.5z" fill="currentColor"/><circle cx="6" cy="5" r="1" fill="currentColor"/><circle cx="9.5" cy="2.8" r=".7" fill="currentColor"/></svg></i><small>Brahma Muhurtam</small><b>3:30 – 5:00 am</b></span></label>
-          <label class="bt"><input type="checkbox" name="entry.167813074" value="Dhriti Online Program | 6.00 am - 7.30 am | IST"><span><i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 17a6 6 0 0 1 12 0"/><path d="M2 20h20"/><path d="M12 3v4M9.5 5.5 12 3l2.5 2.5"/><path d="M4.2 11.2l1.4 1M19.8 11.2l-1.4 1"/></svg></i><small>Sunrise</small><b>6:00 – 7:30 am</b></span></label>
-          <label class="bt"><input type="checkbox" name="entry.167813074" value="Dhriti Online Program | 8.00 am - 9.30 am | IST"><span><i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2" fill="currentColor" stroke="none"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></i><small>Morning</small><b>8:00 – 9:30 am</b></span></label>
-          <label class="bt"><input type="checkbox" name="entry.167813074" value="Dhriti Online Program | 4.00 pm - 5.30 pm | IST"><span><i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="15" cy="10" r="3.6" fill="currentColor" stroke="none"/><path d="M3 16h18M6 19.5h12"/><path d="M15 3.5v1.6M20.8 10h-1.6M19.2 5.8l-1.1 1.1"/></svg></i><small>Evening</small><b>4:00 – 5:30 pm</b></span></label>
-          <label class="bt"><input type="checkbox" name="entry.167813074" value="Dhriti Online Program | 6.00 pm - 7.30 pm | IST"><span><i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 17a6 6 0 0 1 12 0"/><path d="M2 20h20"/><path d="M12 8V4M9.5 5.5 12 8l2.5-2.5"/></svg></i><small>Sunset</small><b>6:00 – 7:30 pm</b></span></label>
-        </div><p class="err" data-err="batch" hidden>Please choose at least one batch.</p>
+        <p class="f" id="lb-batch">Which batch will you attend every day? <span class="req">*</span></p>
+        <div class="bts" id="f-batch" role="radiogroup" aria-labelledby="lb-batch">
+          <label class="bt"><input type="radio" name="entry.167813074" value="Dhriti Online Program |  3.30 am - 5.00 am | IST"><span><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8 8 0 1 0 5 13.6A7 7 0 0 1 15.5 3.5z" fill="currentColor"/><circle cx="6" cy="5" r="1" fill="currentColor"/><circle cx="9.5" cy="2.8" r=".7" fill="currentColor"/></svg></i><small>Brahma Muhurtam</small><b>3:30 – 5:00 am</b></span></label>
+          <label class="bt"><input type="radio" name="entry.167813074" value="Dhriti Online Program | 6.00 am - 7.30 am | IST"><span><i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 17a6 6 0 0 1 12 0"/><path d="M2 20h20"/><path d="M12 3v4M9.5 5.5 12 3l2.5 2.5"/><path d="M4.2 11.2l1.4 1M19.8 11.2l-1.4 1"/></svg></i><small>Sunrise</small><b>6:00 – 7:30 am</b></span></label>
+          <label class="bt"><input type="radio" name="entry.167813074" value="Dhriti Online Program | 8.00 am - 9.30 am | IST"><span><i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2" fill="currentColor" stroke="none"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></i><small>Morning</small><b>8:00 – 9:30 am</b></span></label>
+          <label class="bt"><input type="radio" name="entry.167813074" value="Dhriti Online Program | 4.00 pm - 5.30 pm | IST"><span><i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="15" cy="10" r="3.6" fill="currentColor" stroke="none"/><path d="M3 16h18M6 19.5h12"/><path d="M15 3.5v1.6M20.8 10h-1.6M19.2 5.8l-1.1 1.1"/></svg></i><small>Evening</small><b>4:00 – 5:30 pm</b></span></label>
+          <label class="bt"><input type="radio" name="entry.167813074" value="Dhriti Online Program | 6.00 pm - 7.30 pm | IST"><span><i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 17a6 6 0 0 1 12 0"/><path d="M2 20h20"/><path d="M12 8V4M9.5 5.5 12 8l2.5-2.5"/></svg></i><small>Sunset</small><b>6:00 – 7:30 pm</b></span></label>
+        </div><p class="err" data-err="batch" hidden>Please choose your batch.</p>
         <p class="hint" id="bt-hint">All timings are IST. You can pick more than one.</p>
         <div class="prog"><input type="radio" name="entry.1673622224" value="21 Days" checked hidden><span>Program</span><b data-b="prog">21 Days &middot; 9 to 29 November 2026 &middot; Live online</b></div>
       </section>
@@ -3301,7 +3301,7 @@ document.addEventListener("DOMContentLoaded",function(){
   var BANKS = { "SBI": "SBIN", "HDFC": "HDFC", "ICICI": "ICIC", "Axis": "UTIB", "Kotak": "KKBK", "Canara": "CNRB", "Bank of Baroda": "BARB_R", "Punjab National Bank": "PUNB_R", "Union Bank of India": "UBIN", "Indian Bank": "IDIB", "IDFC FIRST Bank": "IDFB", "Yes Bank": "YESB", "Federal Bank": "FDRL", "IndusInd Bank": "INDB" };
   function realPay() {
     if (orderErr || !order) { prepOrder(lastPerson); return; }
-    var base = { amount: order.amount, currency: order.currency || "INR", order_id: order.orderId, email: lastPerson.email, contact: (lastPerson.contact || "+91" + lastPerson.phone), notes: { batch: lastPerson.batch } };
+    var base = { amount: order.amount, currency: order.currency || "INR", order_id: order.orderId, email: lastPerson.email, contact: (lastPerson.contact || "+91" + lastPerson.phone), notes: { batch: lastPerson.batch, name: lastPerson.name } };
     if (method === "upi" && !mobile) { checkQr(true); return; }
     try {
       if (method === "upi") {
@@ -3458,14 +3458,14 @@ document.addEventListener("DOMContentLoaded",function(){
         key: o.keyId, order_id: o.orderId, amount: o.amount, currency: o.currency || "INR",
         name: "Shudda Hathayoga", description: "Dhriti 21-Day Online Sadhana · " + BATCH.rangeShort,
         prefill: { name: person.name, email: person.email, contact: (person.contact || "+91" + person.phone) },
-        notes: { batch: person.batch }, theme: { color: "#014B3F", backdrop_color: "#04211C" } } }, bridge);
+        notes: { batch: person.batch, name: person.name }, theme: { color: "#014B3F", backdrop_color: "#04211C" } } }, bridge);
       return;
     }
     var rzp = new window.Razorpay({
       key: o.keyId, order_id: o.orderId, amount: o.amount, currency: o.currency || "INR",
       name: "Shudda Hathayoga", description: "Dhriti 21-Day Online Sadhana · " + BATCH.rangeShort,
       prefill: { name: person.name, email: person.email, contact: (person.contact || "+91" + person.phone) },
-      notes: { batch: person.batch },
+      notes: { batch: person.batch, name: person.name },
       theme: { color: "#014B3F", backdrop_color: "#04211C" },
       modal: { confirm_close: true, ondismiss: function () { showDone("pending", null, "Payment not completed yet. Tap the button to try again."); } },
       handler: function (r) {
